@@ -19,7 +19,7 @@ namespace EmployeeTraining.Services
 
         public void Add(User user)
         {
-            throw new NotImplementedException();
+             _userDAL.Add(user);
         }
 
         public bool ApproveRequest(User user, Training traning)

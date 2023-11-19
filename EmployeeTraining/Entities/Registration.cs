@@ -8,11 +8,10 @@ namespace EmployeeTraining.Entities
 {
     public class Registration
     {
-        private string RegistrationId;
+        private string RegistrationId { get; set; }
         private string ManagerId { get; set; }
         private string DepartmentName { get; set; }
-
-        private List<Registration> ListOfPrerequisites { get; set; }
+        private List<string> ListOfPrerequisites { get; set; }
 
         //add application
 

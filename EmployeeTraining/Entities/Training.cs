@@ -8,14 +8,11 @@ namespace EmployeeTraining.Entities
 {
     public class Training
     {
-        private int TrainingId { get; set; }
+        private int TrainingID { get; set; }
         private string TrainingName { get; set; }
-
         private string TrainingDescription { get; set; }
-
         private DateTime RegistrationDeadline { get; set; }
-
-        private string DepartmentName { get; set; }
+        private int DepartmentID { get; set; }
 
     }
 }
