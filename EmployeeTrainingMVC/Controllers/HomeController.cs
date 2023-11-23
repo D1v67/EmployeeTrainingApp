@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using EmployeeTraining.DAL;
+using EmployeeTraining.DAL.Common;
 namespace EmployeeTrainingMVC.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
+            DAL dal = new DAL();
+            EnrollmentDAL registration = new EnrollmentDAL();
+            registration.retrieve();
+
+
             return View();
         }
 

@@ -5,10 +5,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace EmployeeTraining.DAL.Common
 {
-    public class DbCommand
+    public static class DbCommand
     {
         public static DataTable GetData(string query)
         {

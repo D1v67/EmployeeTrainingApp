@@ -1,5 +1,4 @@
-﻿using EmployeeTraining.Entities;
-using EmployeeTraining.Interfaces;
+﻿using EmployeeTraining.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace EmployeeTraining.DAL
 {
-    public class RegistrationDAL : IRegistrationDAL
+    public class GenericDAL<T> : IGenericDAL<T> where T : class
     {
-
-        public void Add(Registration registration)
+        public void Add(T entity)
         {
-            throw new NotImplementedException();
+            //foreach(var property in entity.GetType().GetProperties())
+            //{
+
+            //}
         }
 
         public void Delete(int id)
@@ -21,17 +22,17 @@ namespace EmployeeTraining.DAL
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Registration> GetAll()
+        public IEnumerable<T> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Registration GetByID(int id)
+        public T GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Registration registration)
+        public void Update(T entity)
         {
             throw new NotImplementedException();
         }

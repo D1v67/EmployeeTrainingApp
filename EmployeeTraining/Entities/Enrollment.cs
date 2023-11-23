@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace EmployeeTraining.Entities
 {
-    public class Registration
+    public class Enrollment
     {
-        private string RegistrationId { get; set; }
+        private string EnrollmentId { get; set; }
         private string ManagerId { get; set; }
         private string DepartmentName { get; set; }
         private List<string> ListOfPrerequisites { get; set; }

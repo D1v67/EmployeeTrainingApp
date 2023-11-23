@@ -9,7 +9,7 @@ namespace EmployeeTraining.DAL.Common
 {
     public class DAL
     {
-        public const string connectionstring = @"server=localhost;database=EmployeeTrainingDB;uid=wbpoc;pwd=sql@tfs2008";
+        public const string connectionstring = @"server=localhost;database=EmployeeTestDB;uid=wbpoc;pwd=sql@tfs2008";
 
         public SqlConnection connection;
         public DAL()

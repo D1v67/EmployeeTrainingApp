@@ -10,22 +10,30 @@ namespace EmployeeTraining.DAL
 {
     public class TrainingDAL : ITrainingDAL
     {
-        public void Add(Training training)
-        {
-            throw new NotImplementedException();
-        }
+        public const string GetAllTrainingQuery = @"SELECT  FROM [dbo].[Training]";
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public const string GetTrainingByIdQuery = @"";
 
+        public const string InsertTrainingQuery = @"";
+
+        public const string UpdateTrainingQuery = @"";
+
+        public const string DeleteTrainingQuery = @"";
         public IEnumerable<Training> GetAll()
         {
             throw new NotImplementedException();
         }
 
         public Training GetByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+        public void Add(Training training)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }

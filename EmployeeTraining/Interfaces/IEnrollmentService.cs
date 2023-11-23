@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace EmployeeTraining.Interfaces
 {
-    public interface IRegistrationDAL
+    public interface IEnrollmentService
     {
-        IEnumerable<Registration> GetAll();
-        Registration GetByID(int id);
-        void Add(Registration registration);
+        IEnumerable<Enrollment> GetAll();
+        Enrollment GetByID(int id);
+        void Add(Enrollment enrollment);
         void Delete(int id);
-        void Update(Registration registration);
+        void Update(Enrollment enrollment);
     }
 }

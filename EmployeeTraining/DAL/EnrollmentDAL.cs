@@ -2,22 +2,18 @@
 using EmployeeTraining.Interfaces;
 using System;
 using System.Collections.Generic;
+//using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EmployeeTraining.DAL.Common;
 
-namespace EmployeeTraining.Services
+namespace EmployeeTraining.DAL
 {
-    public class RegistrationService : IRegistrationService
+    public class EnrollmentDAL : IEnrollmentDAL
     {
 
-        private readonly IRegistrationDAL _registrationDAL;
-
-        public RegistrationService(IRegistrationDAL registrationDAL)
-        {
-            _registrationDAL = registrationDAL;
-        }
-        public void Add(Registration training)
+        public void Add(Enrollment enrollment)
         {
             throw new NotImplementedException();
         }
@@ -27,19 +23,26 @@ namespace EmployeeTraining.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Registration> GetAll()
+        public IEnumerable<Enrollment> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Registration GetByID(int id)
+        public Enrollment GetByID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Registration training)
+        public void Update(Enrollment enrollment)
         {
             throw new NotImplementedException();
+        }
+        public String retrieve() {
+            string query = @"SELECT * FROM visitor";
+            var dt = DbCommand.GetData(query);
+
+            var temp = 0;
+            return "";
         }
     }
 }
