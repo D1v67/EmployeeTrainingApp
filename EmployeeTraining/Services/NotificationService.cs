@@ -11,7 +11,7 @@ namespace EmployeeTraining.Services
     public class NotificationService : INotification
     {
 
-        public void SendNotification(User user, string message)
+        public void SendNotification(UserModel user, string message)
         {
             throw new NotImplementedException();
         }

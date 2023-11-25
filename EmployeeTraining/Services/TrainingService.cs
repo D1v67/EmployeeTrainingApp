@@ -1,4 +1,5 @@
-﻿using EmployeeTraining.Entities;
+﻿using EmployeeTraining.DAL;
+using EmployeeTraining.Entities;
 using EmployeeTraining.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,29 +18,29 @@ namespace EmployeeTraining.Services
             _trainingDAL = trainingDAL;
         }
 
-        public void Add(Training training)
+        public void Add(TrainingModel training)
         {
-            throw new NotImplementedException();
+            _trainingDAL.Add(training);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _trainingDAL.Delete(id);
         }
 
-        public IEnumerable<Training> GetAll()
+        public IEnumerable<TrainingModel> GetAll()
         {
-            throw new NotImplementedException();
+            return _trainingDAL.GetAll();
         }
 
-        public Training GetByID(int id)
+        public TrainingModel GetByID(int id)
         {
-            throw new NotImplementedException();
+            return _trainingDAL.GetByID(id);
         }
 
-        public void Update(Training training)
+        public void Update(TrainingModel training)
         {
-            throw new NotImplementedException();
+             _trainingDAL.Update(training);
         }
     }
 }

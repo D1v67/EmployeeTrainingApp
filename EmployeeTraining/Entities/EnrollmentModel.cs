@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeTraining.Entities
 {
-    public class Enrollment
+    public class EnrollmentModel
     {
         private string EnrollmentId { get; set; }
         private string ManagerId { get; set; }

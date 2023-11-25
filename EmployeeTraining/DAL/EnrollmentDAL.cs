@@ -13,7 +13,7 @@ namespace EmployeeTraining.DAL
     public class EnrollmentDAL : IEnrollmentDAL
     {
 
-        public void Add(Enrollment enrollment)
+        public void Add(EnrollmentModel enrollment)
         {
             throw new NotImplementedException();
         }
@@ -23,23 +23,23 @@ namespace EmployeeTraining.DAL
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Enrollment> GetAll()
+        public IEnumerable<EnrollmentModel> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Enrollment GetByID(int id)
+        public EnrollmentModel GetByID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Enrollment enrollment)
+        public void Update(EnrollmentModel enrollment)
         {
             throw new NotImplementedException();
         }
         public String retrieve() {
             string query = @"SELECT * FROM visitor";
-            var dt = DbCommand.GetData(query);
+            var dt = DBCommand.GetData(query);
 
             var temp = 0;
             return "";

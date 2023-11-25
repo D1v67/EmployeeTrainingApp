@@ -9,6 +9,6 @@ namespace EmployeeTraining.Interfaces
 {
     public interface INotification
     {
-        void SendNotification(User user, string message);
+        void SendNotification(UserModel user, string message);
     }
 }

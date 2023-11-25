@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace EmployeeTraining.DAL.Common
 {
-    public static class DbCommand
+    public static class DBCommand
     {
         public static DataTable GetData(string query)
         {
@@ -27,7 +27,7 @@ namespace EmployeeTraining.DAL.Common
             return dt;
         }
 
-        public static int UpdateData(string query, List<SqlParameter> parameters)
+        public static int InsertUpdateData(string query, List<SqlParameter> parameters)
         {
             int numRows = 0;
             DAL dal = new DAL();

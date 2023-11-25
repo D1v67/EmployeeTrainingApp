@@ -9,11 +9,11 @@ namespace EmployeeTraining.Interfaces
 {
     public interface ITrainingService
     {
-        IEnumerable<Training> GetAll();
-        Training GetByID(int id);
-        void Add(Training training);
+        IEnumerable<TrainingModel> GetAll();
+        TrainingModel GetByID(int id);
+        void Add(TrainingModel training);
         void Delete(int id);
-        void Update(Training training);
+        void Update(TrainingModel training);
 
 
     }

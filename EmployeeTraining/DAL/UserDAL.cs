@@ -10,17 +10,17 @@ namespace EmployeeTraining.DAL
 {
     public class UserDAL : IUserDAL
     {
-        public void Add(User user)
+        public void Add(UserModel user)
         {
             throw new NotImplementedException();
         }
 
-        public bool ApproveRequest(User user, Training traning)
+        public bool ApproveRequest(UserModel user, TrainingModel traning)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeclineRequest(User user, Training traning)
+        public bool DeclineRequest(UserModel user, TrainingModel traning)
         {
             throw new NotImplementedException();
         }
@@ -30,32 +30,32 @@ namespace EmployeeTraining.DAL
             throw new NotImplementedException();
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<UserModel> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public User GetByID(int id)
+        public UserModel GetByID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public bool Login(User user)
+        public bool Login(UserModel user)
         {
             throw new NotImplementedException();
         }
 
-        public bool Logout(User user)
+        public bool Logout(UserModel user)
         {
             throw new NotImplementedException();
         }
 
-        public bool Register(User user)
+        public bool Register(UserModel user)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(User user)
+        public void Update(UserModel user)
         {
             throw new NotImplementedException();
         }

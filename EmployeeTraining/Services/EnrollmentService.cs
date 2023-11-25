@@ -17,7 +17,7 @@ namespace EmployeeTraining.Services
         {
             _enrollmentDAL = enrollmentDAL;
         }
-        public void Add(Enrollment training)
+        public void Add(EnrollmentModel training)
         {
             throw new NotImplementedException();
         }
@@ -27,17 +27,17 @@ namespace EmployeeTraining.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Enrollment> GetAll()
+        public IEnumerable<EnrollmentModel> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Enrollment GetByID(int id)
+        public EnrollmentModel GetByID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Enrollment enrollment)
+        public void Update(EnrollmentModel enrollment)
         {
             throw new NotImplementedException();
         }

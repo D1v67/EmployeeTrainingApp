@@ -5,16 +5,27 @@ using System.Web;
 using System.Web.Mvc;
 using EmployeeTraining.DAL;
 using EmployeeTraining.DAL.Common;
+using EmployeeTraining.Interfaces;
+
 namespace EmployeeTrainingMVC.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IDataAccessLayer _layer;
+
+        public HomeController(IDataAccessLayer layer)
+        {
+            _layer = layer;
+        }
         public ActionResult Index()
         {
-            DAL dal = new DAL();
-            EnrollmentDAL registration = new EnrollmentDAL();
-            registration.retrieve();
+            //DAL dal = new DAL();
+            //EnrollmentDAL registration = new EnrollmentDAL();
+            //registration.retrieve();
 
+            //IGenericDAL<User>() userDAL;
+            ViewBag.Message = _layer.Connect();
+            ViewBag.MyName = "MVC";
 
             return View();
         }

@@ -9,10 +9,10 @@ namespace EmployeeTraining.Interfaces
 {
     public interface IEnrollmentService
     {
-        IEnumerable<Enrollment> GetAll();
-        Enrollment GetByID(int id);
-        void Add(Enrollment enrollment);
+        IEnumerable<EnrollmentModel> GetAll();
+        EnrollmentModel GetByID(int id);
+        void Add(EnrollmentModel enrollment);
         void Delete(int id);
-        void Update(Enrollment enrollment);
+        void Update(EnrollmentModel enrollment);
     }
 }

@@ -9,15 +9,15 @@ namespace EmployeeTraining.Interfaces
 {
     public interface IUserService
     {
-        IEnumerable<User> GetAll();
-        User GetByID(int id);
-        void Add(User user);
+        IEnumerable<UserModel> GetAll();
+        UserModel GetByID(int id);
+        void Add(UserModel user);
         void Delete(int id);
-        void Update(User user);
-        bool Register(User user);
-        bool Login(User user);
-        bool Logout(User user);
-        bool ApproveRequest(User user, Training traning);
+        void Update(UserModel user);
+        bool Register(UserModel user);
+        bool Login(UserModel user);
+        bool Logout(UserModel user);
+        bool ApproveRequest(UserModel user, TrainingModel traning);
 
     }
 
