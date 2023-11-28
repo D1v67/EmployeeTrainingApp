@@ -17,9 +17,28 @@ namespace EmployeeTraining.Services
             _userDAL = userDAL;
         }
 
+        public IEnumerable<UserModel> GetAll()
+        {
+            return _userDAL.GetAll();
+        }
+
+        public UserModel GetByID(int id)
+        {
+           return  _userDAL.GetByID(id);
+        }
+
         public void Add(UserModel user)
         {
-             _userDAL.Add(user);
+            _userDAL.Add(user);
+        }
+
+        public void Delete(int id)
+        {
+            _userDAL.Delete(id);
+        }
+        public void Update(UserModel user)
+        {
+            _userDAL.Update(user);
         }
 
         public bool ApproveRequest(UserModel user, TrainingModel traning)
@@ -28,21 +47,6 @@ namespace EmployeeTraining.Services
         }
 
         public bool DeclineRequest(UserModel user, TrainingModel traning)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<UserModel> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public UserModel GetByID(int id)
         {
             throw new NotImplementedException();
         }
@@ -62,9 +66,6 @@ namespace EmployeeTraining.Services
             throw new NotImplementedException();
         }
 
-        public void Update(UserModel user)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

@@ -1,0 +1,66 @@
+﻿@model EmployeeTraining.Entities.TrainingModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TrainingModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainingID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainingID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainingName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainingName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainingDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainingDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationDeadline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationDeadline)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capacity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartmentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartmentID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

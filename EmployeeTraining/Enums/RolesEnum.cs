@@ -8,8 +8,8 @@ namespace EmployeeTraining.Enums
 {
     public enum RolesEnum
     {
-        Employee = 0,
-        Manager = 1,
-        Admin = 2,
+        Employee = 3,
+        Manager = 2,
+        Admin = 1,
     }
 }

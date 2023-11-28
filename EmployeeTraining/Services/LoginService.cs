@@ -1,5 +1,7 @@
 ﻿using EmployeeTraining.DAL;
 using EmployeeTraining.Entities;
+using EmployeeTraining.Interfaces;
+using EmployeeTraining.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,17 +10,31 @@ using System.Threading.Tasks;
 
 namespace EmployeeTraining.Services
 {
-    public class LoginService
+    public class LoginService: ILoginService
     {
-        public static bool AuthenticateUser(LoginModel model)
+        private readonly IUserDAL _userDAL;
+        private readonly ILoginDAL _loginDAL;
+
+        public LoginService(IUserDAL userDAL, ILoginDAL loginDAL)
         {
-            return LoginDAL.AuthenticateUser(model);
+            _userDAL= userDAL;
+            _loginDAL= loginDAL;
+        }
+        public  bool AuthenticateUser(LoginModel model)
+        {
+            return _loginDAL.AuthenticateUser(model);
 
         }
 
-        public static LoginModel GetUserDetailsWithRoles(LoginModel model)
+        public  LoginModel GetUserDetailsWithRoles(LoginModel model)
         {
-            return LoginDAL.GetUserDetailsWithRoles(model);
+            return _loginDAL.GetUserDetailsWithRoles(model);
+
+        }
+
+        public void RegisterUser(RegisterViewModel model)
+        {
+            _loginDAL.Register(model);
 
         }
     }

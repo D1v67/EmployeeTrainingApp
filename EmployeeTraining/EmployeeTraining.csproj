@@ -59,6 +59,8 @@
     <Compile Include="Entities\UserModel.cs" />
     <Compile Include="Enums\RolesEnum.cs" />
     <Compile Include="Enums\StatusEnum.cs" />
+    <Compile Include="Interfaces\ILoginDAL.cs" />
+    <Compile Include="Interfaces\ILoginService.cs" />
     <Compile Include="Interfaces\INotification.cs" />
     <Compile Include="Interfaces\IEnrollmentDAL.cs" />
     <Compile Include="Interfaces\IEnrollmentService.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Services\TrainingService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\ValidationService.cs" />
+    <Compile Include="ViewModel\RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

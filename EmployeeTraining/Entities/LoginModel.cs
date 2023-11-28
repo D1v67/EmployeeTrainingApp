@@ -8,6 +8,7 @@ namespace EmployeeTraining.Entities
 {
     public class LoginModel
     {
+        public int UserID { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string RoleName { get; set; }

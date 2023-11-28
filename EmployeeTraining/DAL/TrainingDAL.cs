@@ -48,18 +48,21 @@ namespace EmployeeTraining.DAL
 
         public IEnumerable<TrainingModel> GetAll()
         {
-            IEnumerable<TrainingModel> trainings = new List<TrainingModel>();
+            List<TrainingModel> trainings = new List<TrainingModel>();
 
             TrainingModel training;
             var dt = DBCommand.GetData(GET_ALL_TRAINING_QUERY);
             foreach (DataRow row in dt.Rows)
             {
                 training = new TrainingModel();
+                training.TrainingID = int.Parse(row["TrainingID"].ToString());
                 training.TrainingName = row["TrainingName"].ToString();
                 training.TrainingDescription = row["TrainingDescription"].ToString();
                 training.RegistrationDeadline = (DateTime)row["RegistrationDeadline"];
                 training.Capacity = int.Parse(row["Capacity"].ToString());
                 training.DepartmentID = int.Parse(row["DepartmentID"].ToString());
+
+                trainings.Add(training);
             }
 
             return trainings;
@@ -74,8 +77,7 @@ namespace EmployeeTraining.DAL
             if (dt.Rows.Count > 0)
             {
                 DataRow row = dt.Rows[0];
-                //int trainingId;
-                //int.TryParse(row["TrainingID"].ToString(), out trainingId);
+
                 TrainingModel training = new TrainingModel
                 {
 

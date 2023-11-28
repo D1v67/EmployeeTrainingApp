@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,9 @@ namespace EmployeeTraining.DAL.Common
 {
     public class DAL
     {
-        public const string connectionstring = @"server=localhost;database=EmployeeTrainingDB;uid=wbpoc;pwd=sql@tfs2008";
+        //public const string connectionstring = @"server=localhost;database=EmployeeTrainingDB;uid=wbpoc;pwd=sql@tfs2008";
+
+        public  string connectionstring = ConfigurationManager.ConnectionStrings["DefaultConnectionString"].ConnectionString;
 
         public SqlConnection connection;
         public DAL()

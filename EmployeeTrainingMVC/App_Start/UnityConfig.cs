@@ -19,9 +19,15 @@ namespace EmployeeTrainingMVC
 
             // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<IDataAccessLayer, DataAccessLayer>();
+
             container.RegisterType<ITrainingDAL, TrainingDAL>();
             container.RegisterType<ITrainingService, TrainingService>();
             //container.RegisterType<IDataAccessLayer, DataAccessLayer>();
+            container.RegisterType<IUserDAL, UserDAL>();
+            container.RegisterType<IUserService, UserService>();
+
+            container.RegisterType<ILoginService, LoginService>();
+            container.RegisterType<ILoginDAL, LoginDAL>();
 
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
