@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeTraining.DAL
 {
-    public class LoginDAL : ILoginDAL
+    public class AccountDAL : IAccountDAL
     {
         public const string AUTHENTICATE_USER_QUERY = @"
                                                     SELECT u.* 
@@ -54,7 +54,7 @@ namespace EmployeeTraining.DAL
         //inner join Role r with(nolock) on a.RoleId = r.RoleId
         //WHERE user.Email = @Email";
 
-        public  bool AuthenticateUser(LoginModel model)
+        public  bool AuthenticateUser(AccountModel model)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Email", model.Email));
@@ -67,9 +67,9 @@ namespace EmployeeTraining.DAL
 
         }
 
-        public  LoginModel GetUserDetailsWithRoles(LoginModel model)
+        public  AccountModel GetUserDetailsWithRoles(AccountModel model)
         {
-            LoginModel user = new LoginModel();
+            AccountModel user = new AccountModel();
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Email", model.Email));
 
@@ -98,7 +98,7 @@ namespace EmployeeTraining.DAL
         }
 
 
-        public  void AddAccount(LoginModel model)
+        public  void AddAccount(AccountModel model)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
 

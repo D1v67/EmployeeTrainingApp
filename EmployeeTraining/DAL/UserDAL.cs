@@ -74,9 +74,9 @@ namespace EmployeeTraining.DAL
                 user.Email = row["Email"].ToString();
                 user.NIC = row["NIC"].ToString();
                 user.MobileNumber = row["MobileNumber"].ToString();
-                user.RoleID = int.Parse(row["RoleID"].ToString());
-                user.DepartmentID = int.Parse(row["DepartmentID"].ToString());
-                user.ManagerID = int.Parse(row["ManagerID"].ToString());
+                //user.RoleID = int.Parse(row["RoleID"].ToString());
+                //user.DepartmentID = int.Parse(row["DepartmentID"].ToString());
+                //user.ManagerID = int.Parse(row["ManagerID"].ToString());
 
                 users.Add(user);
             }

@@ -10,12 +10,12 @@ using EmployeeTraining.ViewModel;
 
 namespace EmployeeTraining.Interfaces
 {
-    public interface ILoginDAL
+    public interface IAccountDAL
     {
-          bool AuthenticateUser(LoginModel model);
+          bool AuthenticateUser(AccountModel model);
    
 
-          LoginModel GetUserDetailsWithRoles(LoginModel model);
+          AccountModel GetUserDetailsWithRoles(AccountModel model);
    
 
 

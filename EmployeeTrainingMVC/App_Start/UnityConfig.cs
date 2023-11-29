@@ -26,8 +26,8 @@ namespace EmployeeTrainingMVC
             container.RegisterType<IUserDAL, UserDAL>();
             container.RegisterType<IUserService, UserService>();
 
-            container.RegisterType<ILoginService, LoginService>();
-            container.RegisterType<ILoginDAL, LoginDAL>();
+            container.RegisterType<IAccountService, AccountService>();
+            container.RegisterType<IAccountDAL, AccountDAL>();
 
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));

@@ -12,7 +12,7 @@ namespace EmployeeTraining.DAL.Common
     {
         //public const string connectionstring = @"server=localhost;database=EmployeeTrainingDB;uid=wbpoc;pwd=sql@tfs2008";
 
-        public  string connectionstring = ConfigurationManager.ConnectionStrings["DefaultConnectionString"].ConnectionString;
+        public string connectionstring = ConfigurationManager.ConnectionStrings["DefaultConnectionString"].ConnectionString;
 
         public SqlConnection connection;
         public DAL()

@@ -1,11 +1,7 @@
 ﻿using EmployeeTraining.Entities;
-using EmployeeTraining.Enums;
 using EmployeeTraining.Interfaces;
-using EmployeeTraining.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace EmployeeTrainingMVC.Controllers
@@ -17,31 +13,63 @@ namespace EmployeeTrainingMVC.Controllers
         {
             _userService = userService;
         }
-        // GET: UserDefault
-        public ActionResult Index()
-        {
-            UserModel user = new UserModel() {FirstName= "Divesh", LastName="Nugesur",Email="eee@mail.com",NIC ="NSSS11",MobileNumber="32321312", RoleID = 3, DepartmentID= 2, ManagerID= 2};
 
-           
+        public ActionResult Index()
+
+        {
+            IEnumerable<UserModel> users = new List<UserModel>();
             try
             {
-                //IEnumerable<UserModel> users = new List<UserModel>();
-                //users = _userService.GetAll();
+               
 
-                //_userService.GetAll();
-                //UserModel user = new UserModel();
+                users = _userService.GetAll();
 
-                 _userService.Add(user);
 
-                //_userService.Delete(6);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-
             }
-            return View();
+
+            return View(users);
         }
+        // GET: UserDefault
+        //public ActionResult Index()
+        //{
+        //    //UserModel user = new UserModel() {FirstName= "Divesh", LastName="Nugesur",Email="eee@mail.com",NIC ="NSSS11",MobileNumber="32321312", RoleID = 3, DepartmentID= 2, ManagerID= 2};
+
+        //    //IEnumerable<UserModel> users = new List<UserModel>();
+        //    //try
+        //    //{
+
+        //    //    users = _userService.GetAll();
+
+
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //    Console.WriteLine(ex.Message);
+        //    //}
+        //    try
+        //    {
+        //        IEnumerable<UserModel> users = new List<UserModel>();
+        //        //users = _userService.GetAll();
+
+        //        users = _userService.GetAll();
+        //        //UserModel user = new UserModel();
+
+        //        //_userService.Add(user);
+
+        //        //_userService.Delete(6);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.Message);
+
+        //    }
+
+        //    return View(users);
+        //}
 
         // GET: UserDefault/Details/5
         public ActionResult Details(int id)

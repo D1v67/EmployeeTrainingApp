@@ -10,7 +10,6 @@ namespace EmployeeTraining.Entities
     public class TrainingModel
     {
         public int TrainingID { get; set; }
-        [DisplayName("Training Name")]
         public string TrainingName { get; set; }
         public string TrainingDescription { get; set; }
         public DateTime RegistrationDeadline { get; set; }

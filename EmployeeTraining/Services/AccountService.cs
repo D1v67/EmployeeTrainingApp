@@ -10,23 +10,23 @@ using System.Threading.Tasks;
 
 namespace EmployeeTraining.Services
 {
-    public class LoginService: ILoginService
+    public class AccountService : IAccountService
     {
         private readonly IUserDAL _userDAL;
-        private readonly ILoginDAL _loginDAL;
+        private readonly IAccountDAL _loginDAL;
 
-        public LoginService(IUserDAL userDAL, ILoginDAL loginDAL)
+        public AccountService(IUserDAL userDAL, IAccountDAL loginDAL)
         {
-            _userDAL= userDAL;
-            _loginDAL= loginDAL;
+            _userDAL = userDAL;
+            _loginDAL = loginDAL;
         }
-        public  bool AuthenticateUser(LoginModel model)
+        public bool AuthenticateUser(AccountModel model)
         {
             return _loginDAL.AuthenticateUser(model);
 
         }
 
-        public  LoginModel GetUserDetailsWithRoles(LoginModel model)
+        public AccountModel GetUserDetailsWithRoles(AccountModel model)
         {
             return _loginDAL.GetUserDetailsWithRoles(model);
 

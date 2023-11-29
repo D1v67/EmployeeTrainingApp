@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace EmployeeTraining.Interfaces
 {
-    public interface ILoginService
+    public interface IAccountService
     {
-        bool AuthenticateUser(LoginModel model);
+        bool AuthenticateUser(AccountModel model);
 
 
-        LoginModel GetUserDetailsWithRoles(LoginModel model);
+        AccountModel GetUserDetailsWithRoles(AccountModel model);
 
         void RegisterUser(RegisterViewModel model);
 

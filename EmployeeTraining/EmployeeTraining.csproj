@@ -48,8 +48,10 @@
     <Compile Include="DAL\Common\DBCommand.cs" />
     <Compile Include="DAL\EnrollmentDAL.cs" />
     <Compile Include="DAL\GenericDAL.cs" />
-    <Compile Include="DAL\LoginDAL.cs" />
-    <Compile Include="Entities\LoginModel.cs" />
+    <Compile Include="DAL\AccountDAL.cs" />
+    <Compile Include="Entities\AccountModel.cs" />
+    <Compile Include="Helpers\Encrypt.cs" />
+    <Compile Include="Helpers\PasswordHasher.cs" />
     <Compile Include="Interfaces\IDataAccessLayer.cs" />
     <Compile Include="Interfaces\IGenericDAL.cs" />
     <Compile Include="DAL\TrainingDAL.cs" />
@@ -59,8 +61,8 @@
     <Compile Include="Entities\UserModel.cs" />
     <Compile Include="Enums\RolesEnum.cs" />
     <Compile Include="Enums\StatusEnum.cs" />
-    <Compile Include="Interfaces\ILoginDAL.cs" />
-    <Compile Include="Interfaces\ILoginService.cs" />
+    <Compile Include="Interfaces\IAccountDAL.cs" />
+    <Compile Include="Interfaces\IAccountService.cs" />
     <Compile Include="Interfaces\INotification.cs" />
     <Compile Include="Interfaces\IEnrollmentDAL.cs" />
     <Compile Include="Interfaces\IEnrollmentService.cs" />
@@ -70,7 +72,7 @@
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Interfaces\IValidationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\LoginService.cs" />
+    <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\EnrollmentService.cs" />
     <Compile Include="Services\TrainingService.cs" />

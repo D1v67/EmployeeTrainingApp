@@ -12,7 +12,7 @@ $(function () {
     $("#btnRegister").click(function () {
         //toastr.info('Page under construction');
         //console.log("here")
-        window.location = '/Login/Register';
+        window.location = '/Account/Register';
 
     });
 
@@ -26,7 +26,7 @@ $(function () {
         var authObj = { Email: emailAddress, Password: password };
         $.ajax({
             type: "POST",
-            url: "/Login/Authenticate",
+            url: "/Account/Authenticate",
             data: authObj,
             dataType: "json",
             success: function (response) {
@@ -48,7 +48,7 @@ $(function () {
                 toastr.error('Unable to make request!!');
             },
             error: function (response) {
-                toastr.error('Something happened, Please contact Administrator!!');
+                toastr.error('Something happened, Please contact Administrator!! ', response);
 
             }
         });

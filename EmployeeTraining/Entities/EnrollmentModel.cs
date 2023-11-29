@@ -11,7 +11,7 @@ namespace EmployeeTraining.Entities
         private string EnrollmentId { get; set; }
         private string ManagerId { get; set; }
         private string DepartmentName { get; set; }
-        private List<string> ListOfPrerequisites { get; set; }
+        
 
         //add application
 

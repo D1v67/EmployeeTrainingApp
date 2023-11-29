@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeTraining.Entities
 {
-    public class LoginModel
+    public class AccountModel
     {
         public int UserID { get; set; }
         public string Email { get; set; }
