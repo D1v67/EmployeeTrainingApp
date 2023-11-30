@@ -43,8 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="DAL\Common\DAL.cs" />
     <Compile Include="DAL\Common\DataAccessLayer.cs" />
+    <Compile Include="Interfaces\IDBCommand.cs" />
+    <Compile Include="Interfaces\IDataAccessLayer.cs" />
+    <Compile Include="DAL\Common\Test_DataAccessLayer.cs" />
     <Compile Include="DAL\Common\DBCommand.cs" />
     <Compile Include="DAL\EnrollmentDAL.cs" />
     <Compile Include="DAL\GenericDAL.cs" />
@@ -52,7 +54,7 @@
     <Compile Include="Entities\AccountModel.cs" />
     <Compile Include="Helpers\Encrypt.cs" />
     <Compile Include="Helpers\PasswordHasher.cs" />
-    <Compile Include="Interfaces\IDataAccessLayer.cs" />
+    <Compile Include="Interfaces\Test_IDataAccessLayer.cs" />
     <Compile Include="Interfaces\IGenericDAL.cs" />
     <Compile Include="DAL\TrainingDAL.cs" />
     <Compile Include="DAL\UserDAL.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\ValidationService.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
+    <Compile Include="ViewModel\TrainingViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

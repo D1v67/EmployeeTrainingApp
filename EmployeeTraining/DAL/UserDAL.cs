@@ -59,12 +59,19 @@ namespace EmployeeTraining.DAL
 
         public const string SET_USER_PASSWORD = "";
 
+        private readonly IDBCommand _dbCommand;
+
+        public  UserDAL(IDBCommand dbCommand)
+        {
+            _dbCommand = dbCommand;
+        }
+
         public IEnumerable<UserModel> GetAll()
         {
             List<UserModel> users = new List<UserModel>();
 
             UserModel user;
-            var dt = DBCommand.GetData(GET_ALL_USER_QUERY);
+            var dt = _dbCommand.GetData(GET_ALL_USER_QUERY);
             foreach (DataRow row in dt.Rows)
             {
                 user = new UserModel();
@@ -87,7 +94,7 @@ namespace EmployeeTraining.DAL
         public UserModel GetByID(int id)
         {
             var parameters = new List<SqlParameter> { new SqlParameter("@UserID", id) };
-            var dt = DBCommand.GetDataWithConditions(GET_USER_BY_ID_QUERY, parameters);
+            var dt = _dbCommand.GetDataWithConditions(GET_USER_BY_ID_QUERY, parameters);
 
             if (dt.Rows.Count > 0)
             {
@@ -126,13 +133,13 @@ namespace EmployeeTraining.DAL
             parameters.Add(new SqlParameter("@DepartmentID", user.DepartmentID));
             parameters.Add(new SqlParameter("@ManagerID", user.ManagerID));
 
-            DBCommand.InsertUpdateData(INSERT_USER_QUERY, parameters);
+            _dbCommand.InsertUpdateData(INSERT_USER_QUERY, parameters);
         }
 
         public void Delete(int id)
         {
             var parameters = new List<SqlParameter> { new SqlParameter("@UserID", id) };
-            DBCommand.InsertUpdateData(DELETE_USER_QUERY, parameters);
+            _dbCommand.InsertUpdateData(DELETE_USER_QUERY, parameters);
         }
 
         public void Update(UserModel user)
@@ -148,7 +155,7 @@ namespace EmployeeTraining.DAL
             parameters.Add(new SqlParameter("@DepartmentID", user.DepartmentID));
             parameters.Add(new SqlParameter("@ManagerID", user.ManagerID));
 
-            DBCommand.InsertUpdateData(UPDATE_USER_QUERY, parameters);
+            _dbCommand.InsertUpdateData(UPDATE_USER_QUERY, parameters);
         }
 
         public bool ApproveRequest(UserModel user, TrainingModel traning)

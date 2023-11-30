@@ -12,28 +12,23 @@ namespace EmployeeTrainingMVC.Controllers
 {
     public class TrainingController : Controller
     {
-        // GET: Training
         private readonly ITrainingService _trainingService;
         public TrainingController(ITrainingService trainingService)
         {
             _trainingService = trainingService;
         }
+        //GET ALL TRAINING
         public ActionResult Index()
-
         {
             IEnumerable<TrainingModel> trainings = new List<TrainingModel>();
             try
-            {
-                
-                trainings = _trainingService.GetAll();
-
-              
+            {             
+                trainings = _trainingService.GetAll();           
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-
             return View(trainings);
         }
 

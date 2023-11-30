@@ -46,12 +46,19 @@ namespace EmployeeTraining.DAL
 
         public const string DELETE_TRAINING_QUERY = @"DELETE FROM [dbo].[Training] WHERE [TrainingID] = @TrainingID";
 
+        private readonly IDBCommand _dbCommand;
+
+        public TrainingDAL(IDBCommand dbCommand)
+        {
+            _dbCommand = dbCommand;
+
+        }
         public IEnumerable<TrainingModel> GetAll()
         {
             List<TrainingModel> trainings = new List<TrainingModel>();
 
             TrainingModel training;
-            var dt = DBCommand.GetData(GET_ALL_TRAINING_QUERY);
+            var dt = _dbCommand.GetData(GET_ALL_TRAINING_QUERY);
             foreach (DataRow row in dt.Rows)
             {
                 training = new TrainingModel();
@@ -72,7 +79,7 @@ namespace EmployeeTraining.DAL
         public TrainingModel GetByID(int id)
         {
             var parameters = new List<SqlParameter> { new SqlParameter("@TrainingID", id) };
-            var dt = DBCommand.GetDataWithConditions(GET_TRAINING_BY_ID_QUERY, parameters);
+            var dt = _dbCommand.GetDataWithConditions(GET_TRAINING_BY_ID_QUERY, parameters);
 
             if (dt.Rows.Count > 0)
             {
@@ -105,13 +112,13 @@ namespace EmployeeTraining.DAL
             parameters.Add(new SqlParameter("@Capacity", training.Capacity));
             parameters.Add(new SqlParameter("@DepartmentID", training.DepartmentID));
 
-            DBCommand.InsertUpdateData(INSERT_TRAINING_QUERY, parameters);
+            _dbCommand.InsertUpdateData(INSERT_TRAINING_QUERY, parameters);
         }
 
         public void Delete(int id)
         {
             var parameters = new List<SqlParameter> { new SqlParameter("@TrainingID", id) };
-            DBCommand.InsertUpdateData(DELETE_TRAINING_QUERY, parameters);
+            _dbCommand.InsertUpdateData(DELETE_TRAINING_QUERY, parameters);
         }
 
         public void Update(TrainingModel training)
@@ -124,7 +131,7 @@ namespace EmployeeTraining.DAL
             parameters.Add(new SqlParameter("@Capacity", training.Capacity));
             parameters.Add(new SqlParameter("@DepartmentID", training.DepartmentID));
 
-            DBCommand.InsertUpdateData(INSERT_TRAINING_QUERY, parameters);
+            _dbCommand.InsertUpdateData(INSERT_TRAINING_QUERY, parameters);
         }
     }
 }

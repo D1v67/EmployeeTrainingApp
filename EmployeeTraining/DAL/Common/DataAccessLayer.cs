@@ -1,8 +1,6 @@
-﻿using EmployeeTraining.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -10,75 +8,45 @@ using System.Threading.Tasks;
 
 namespace EmployeeTraining.DAL.Common
 {
-    public class DataAccessLayer : IDataAccessLayer
+    public class DataAccessLayer 
     {
-        //private readonly ILogger logger;
+        //public const string connectionstring = @"server=localhost;database=EmployeeTrainingDB;uid=wbpoc;pwd=sql@tfs2008";
+
+        public string connectionstring = ConfigurationManager.ConnectionStrings["DefaultConnectionString"].ConnectionString;
+
+        public SqlConnection connection;
+
+       
         public DataAccessLayer()
         {
-            
+            connection = new SqlConnection(connectionstring);
+            OpenConnection();
         }
-
-        public SqlConnection Connection { get; private set; }
-        public string Connect()
+        public void OpenConnection()
         {
             try
             {
-                var connectionString = ConfigurationManager.AppSettings["DefaultConnectionString"];
-                if (!string.IsNullOrEmpty(connectionString))
+                if (connection.State == System.Data.ConnectionState.Open)
                 {
-                    Connection = new SqlConnection(connectionString);
-                    Connection.Open();
-                   // logger.Log("Connected Successfully");
+                    connection.Close();
                 }
+
+                connection.Open();
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                //logger.Log("Fail to connect");
-                return "Unable to find the connection string " + ex.Message;
+                throw ex;
             }
-            return "DB Connect: OK";
         }
 
-        public string Connect(string connectionString)
+        public void CloseConnection()
         {
-            try
+            if (connection != null && connection.State == System.Data.ConnectionState.Open)
             {
-                if (!string.IsNullOrEmpty(connectionString))
-                {
-                    Connection = new SqlConnection(connectionString);
-                    Connection.Open();
-                   // logger.Log("Connected Successfully");
-                }
-            }
-            catch (Exception ex)
-            {
-                //logger.Log("Fail to connect");
-                return "Unable to find the connection string " + ex.Message;
-            }
-
-            return "DB Connect: OK";
-        }
-
-        public void Disconnect()
-        {
-            if (Connection != null && Connection.State.Equals(ConnectionState.Open))
-            {
-                Connection.Close();
+                connection.Close();
+                connection.Dispose();
             }
         }
 
-        // CRUDS Ops
-        public DataTable GetData(string sql, List<SqlParameter> parameters)
-        {
-            DataTable dt = null;
-
-            using (SqlCommand cmd = new SqlCommand(sql, Connection))
-            {
-                cmd.Parameters.AddRange(parameters.ToArray());
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                adapter.Fill(dt);
-                return dt;
-            }
-        }
     }
 }

@@ -1,85 +1,76 @@
 ﻿using EmployeeTraining.Entities;
 using EmployeeTraining.Interfaces;
+using EmployeeTraining.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace EmployeeTrainingMVC.Controllers
 {
-    public class UserController : Controller
+    public class EnrollmentController : Controller
     {
-        private readonly IUserService _userService;
-        public UserController(IUserService userService) 
-        {
-            _userService = userService;
-        }
+        private readonly IEnrollmentService _enrollmentService;
+        private readonly ITrainingService _trainingService;
 
-        //GET ALL USERS
+        public EnrollmentController(IEnrollmentService enrollmentService, ITrainingService trainingService)
+        {
+            _enrollmentService = enrollmentService;
+            _trainingService = trainingService;
+        }
+        // GET: Enrollment
+        //GET ALL TRAINING
         public ActionResult Index()
         {
-            IEnumerable<UserModel> users = new List<UserModel>();
+
+            IEnumerable<EnrollmentModel> enrollments = new List<EnrollmentModel>();
             try
             {
-                users = _userService.GetAll();
+                enrollments = _enrollmentService.GetAll();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-
-            return View(users);
+            return View(enrollments);
         }
-        // GET: UserDefault
-        //public ActionResult Index()
-        //{
-        //    //UserModel user = new UserModel() {FirstName= "Divesh", LastName="Nugesur",Email="eee@mail.com",NIC ="NSSS11",MobileNumber="32321312", RoleID = 3, DepartmentID= 2, ManagerID= 2};
 
-        //    //IEnumerable<UserModel> users = new List<UserModel>();
-        //    //try
-        //    //{
+        public JsonResult ViewTrainingData()
+        {
 
-        //    //    users = _userService.GetAll();
+            IEnumerable<TrainingModel> trainings = new List<TrainingModel>();
+            try
+            {
+                trainings = _trainingService.GetAll();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return Json(trainings, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ViewTraining()
+        {
+            return View();
+        }
 
 
-        //    //}
-        //    //catch (Exception ex)
-        //    //{
-        //    //    Console.WriteLine(ex.Message);
-        //    //}
-        //    try
-        //    {
-        //        IEnumerable<UserModel> users = new List<UserModel>();
-        //        //users = _userService.GetAll();
 
-        //        users = _userService.GetAll();
-        //        //UserModel user = new UserModel();
-
-        //        //_userService.Add(user);
-
-        //        //_userService.Delete(6);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine(ex.Message);
-
-        //    }
-
-        //    return View(users);
-        //}
-
-        // GET: UserDefault/Details/5
+        // GET: Enrollment/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: UserDefault/Create
+        // GET: Enrollment/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: UserDefault/Create
+        // POST: Enrollment/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -95,13 +86,13 @@ namespace EmployeeTrainingMVC.Controllers
             }
         }
 
-        // GET: UserDefault/Edit/5
+        // GET: Enrollment/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: UserDefault/Edit/5
+        // POST: Enrollment/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -117,13 +108,13 @@ namespace EmployeeTrainingMVC.Controllers
             }
         }
 
-        // GET: UserDefault/Delete/5
+        // GET: Enrollment/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: UserDefault/Delete/5
+        // POST: Enrollment/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

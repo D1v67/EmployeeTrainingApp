@@ -54,13 +54,21 @@ namespace EmployeeTraining.DAL
         //inner join Role r with(nolock) on a.RoleId = r.RoleId
         //WHERE user.Email = @Email";
 
+        private readonly IDBCommand _dbCommand;
+
+        public AccountDAL(IDBCommand dbCommand)
+        {
+            _dbCommand = dbCommand;
+
+
+        }
         public  bool AuthenticateUser(AccountModel model)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Email", model.Email));
             parameters.Add(new SqlParameter("@Password", model.Password));
 
-            var dt = DBCommand.GetDataWithConditions(AUTHENTICATE_USER_QUERY, parameters);
+            var dt = _dbCommand.GetDataWithConditions(AUTHENTICATE_USER_QUERY, parameters);
 
             return dt.Rows.Count > 0;
 
@@ -73,9 +81,10 @@ namespace EmployeeTraining.DAL
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Email", model.Email));
 
-            var dt = DBCommand.GetDataWithConditions(GET_USER_DETAILS_WITH_ROLE_QUERY, parameters);
+            var dt = _dbCommand.GetDataWithConditions(GET_USER_DETAILS_WITH_ROLE_QUERY, parameters);
             foreach (DataRow row in dt.Rows)
             {
+                user.UserID = int.Parse(row["UserID"].ToString());
                 user.RoleName = row["RoleType"].ToString();
                 user.Email = row["Email"].ToString().Trim();
                 user.RoleId = int.Parse(row["RoleId"].ToString());
@@ -94,7 +103,7 @@ namespace EmployeeTraining.DAL
             parameters.Add(new SqlParameter("@MobileNumber", model.MobileNumber));
             parameters.Add(new SqlParameter("@Password", model.Password));
 
-            DBCommand.InsertUpdateData(INSERT_USER_AND_ACCOUNT_REGISTER_QUERY, parameters);
+            _dbCommand.InsertUpdateData(INSERT_USER_AND_ACCOUNT_REGISTER_QUERY, parameters);
         }
 
 
@@ -105,7 +114,7 @@ namespace EmployeeTraining.DAL
             parameters.Add(new SqlParameter("@UserID", model.UserID));
             parameters.Add(new SqlParameter("@Password", model.Password));
 
-            DBCommand.InsertUpdateData(INSERT_ACCOUNT_QUERY, parameters);
+            _dbCommand.InsertUpdateData(INSERT_ACCOUNT_QUERY, parameters);
         }
 
 

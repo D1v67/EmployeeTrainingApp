@@ -7,11 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 namespace EmployeeTraining.DAL.Common
 {
-    public static class DBCommand
+    public class DBCommand: IDBCommand
     {
-        public static DataTable GetData(string query)
+        //private readonly IDataAccessLayer _dal;
+        //public DBCommand(IDataAccessLayer dal)
+        //{
+        //    _dal = dal;
+        //}
+
+        public DataTable GetData(string query)
         {
-            DAL dal = new DAL();
+            DataAccessLayer dal = new DataAccessLayer();
             DataTable dt = new DataTable();
             using (SqlCommand cmd = new SqlCommand(query, dal.connection))
             {
@@ -27,17 +33,18 @@ namespace EmployeeTraining.DAL.Common
             return dt;
         }
 
-        public static int InsertUpdateData(string query, List<SqlParameter> parameters)
+        public int InsertUpdateData(string query, List<SqlParameter> parameters)
         {
             int numRows = 0;
-            DAL dal = new DAL();
+            DataAccessLayer dal = new DataAccessLayer();
 
             using (SqlCommand cmd = new SqlCommand(query, dal.connection))
             {
                 cmd.CommandType = CommandType.Text;
                 if (parameters != null)
                 {
-                    parameters.ForEach(parameter => {
+                    parameters.ForEach(parameter =>
+                    {
 
                         cmd.Parameters.AddWithValue(parameter.ParameterName, parameter.Value);
 
@@ -54,16 +61,17 @@ namespace EmployeeTraining.DAL.Common
 
         }
 
-        public static DataTable GetDataWithConditions(string query, List<SqlParameter> parameters)
+        public DataTable GetDataWithConditions(string query, List<SqlParameter> parameters)
         {
-            DAL dal = new DAL();
+            DataAccessLayer dal = new DataAccessLayer();
             DataTable dt = new DataTable();
             using (SqlCommand cmd = new SqlCommand(query, dal.connection))
             {
                 cmd.CommandType = CommandType.Text;
                 if (parameters != null)
                 {
-                    parameters.ForEach(parameter => {
+                    parameters.ForEach(parameter =>
+                    {
                         cmd.Parameters.AddWithValue(parameter.ParameterName, parameter.Value);
                     });
                 }

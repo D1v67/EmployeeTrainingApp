@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using System.Data.SqlClient;
 
-namespace EmployeeTraining.Interfaces
-{
-    public interface IDataAccessLayer
-    {
-        string Connect();
-        void Disconnect();
-        string Connect(string connectionString);
-        DataTable GetData(string sql,List<SqlParameter> parameters);
-    }
-}
+//namespace EmployeeTraining.DAL.Common
+//{
+//    public interface IDataAccessLayer
+//    {
+//        SqlConnection connection { get; set; }
+//        void CloseConnection();
+//        void OpenConnection();
+//    }
+//}

@@ -11,9 +11,9 @@ namespace EmployeeTrainingMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IDataAccessLayer _layer;
+        private readonly Test_IDataAccessLayer _layer;
 
-        public HomeController(IDataAccessLayer layer)
+        public HomeController(Test_IDataAccessLayer layer)
         {
             _layer = layer;
         }

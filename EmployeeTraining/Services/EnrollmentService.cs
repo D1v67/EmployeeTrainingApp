@@ -29,7 +29,7 @@ namespace EmployeeTraining.Services
 
         public IEnumerable<EnrollmentModel> GetAll()
         {
-            throw new NotImplementedException();
+            return _enrollmentDAL.GetAll();
         }
 
         public EnrollmentModel GetByID(int id)

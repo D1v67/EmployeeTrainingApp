@@ -8,10 +8,13 @@ namespace EmployeeTraining.Entities
 {
     public class EnrollmentModel
     {
-        private string EnrollmentId { get; set; }
-        private string ManagerId { get; set; }
-        private string DepartmentName { get; set; }
-        
+        public int EnrollmentID { get; set; }
+        public int UserID { get; set; }
+        public int TrainingID { get; set; }
+        public  DateTime EnrollmentDate { get; set; }
+
+        public string EnrollmentStatus { get; set; }
+
 
         //add application
 

@@ -18,7 +18,11 @@ namespace EmployeeTrainingMVC
             // it is NOT necessary to register your controllers
 
             // e.g. container.RegisterType<ITestService, TestService>();
-            container.RegisterType<IDataAccessLayer, DataAccessLayer>();
+            //container.RegisterType<Test_IDataAccessLayer, Test_DataAccessLayer>();
+            //container.RegisterType<Test_IDataAccessLayer, Test_DataAccessLayer>();
+
+            //container.RegisterType<IDataAccessLayer, DataAccessLayer>();
+            container.RegisterType<IDBCommand, DBCommand>();
 
             container.RegisterType<ITrainingDAL, TrainingDAL>();
             container.RegisterType<ITrainingService, TrainingService>();
@@ -28,6 +32,9 @@ namespace EmployeeTrainingMVC
 
             container.RegisterType<IAccountService, AccountService>();
             container.RegisterType<IAccountDAL, AccountDAL>();
+
+            container.RegisterType<IEnrollmentService, EnrollmentService>();
+            container.RegisterType<IEnrollmentDAL, EnrollmentDAL>();
 
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));

@@ -42,20 +42,23 @@ namespace EmployeeTrainingMVC.Controllers
         public JsonResult Authenticate(AccountModel model)
         {
             //LoginModel model = new LoginModel() { Email= "john.doe@example.com", Password= "adminpassword"};
-
             bool IsUserValid = _loginService.AuthenticateUser(model);
 
             //return IsUserValid;
-
             if (IsUserValid)
             {
                 AccountModel userInfo = _loginService.GetUserDetailsWithRoles(model);
-                this.Session["CurrentUser"] = userInfo;
+                //this.Session["CurrentUser"] = userInfo;
+                //this.Session["CurrentRole"] = userInfo.RoleName;
+                this.Session["UserID"] = userInfo.UserID;
                 this.Session["CurrentRole"] = userInfo.RoleName;
+               // this.Session["UserName"] = userInfo.Password;
+                this.Session["Email"] = userInfo.Email;
+
 
             }
 
-            return Json(new { result = IsUserValid, url = Url.Action("Index", "Home") });
+            return Json(new { result = IsUserValid, url = Url.Action("ViewTraining", "Enrollment") });
         }
 
         //[HttpPost]
