@@ -13,8 +13,6 @@ namespace EmployeeTrainingMVC.Controllers
         {
             _userService = userService;
         }
-
-        //GET ALL USERS
         public ActionResult Index()
         {
             IEnumerable<UserModel> users = new List<UserModel>();

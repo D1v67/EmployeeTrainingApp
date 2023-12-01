@@ -81,10 +81,11 @@ namespace EmployeeTraining.DAL
                 user.Email = row["Email"].ToString();
                 user.NIC = row["NIC"].ToString();
                 user.MobileNumber = row["MobileNumber"].ToString();
-                //user.RoleID = int.Parse(row["RoleID"].ToString());
-                //user.DepartmentID = int.Parse(row["DepartmentID"].ToString());
-                //user.ManagerID = int.Parse(row["ManagerID"].ToString());
+                user.RoleID = int.Parse(row["RoleID"].ToString());
 
+                // NULL 
+                //user.DepartmentID = row["DepartmentID"] != DBNull.Value ? (int?)row["DepartmentID"] : null;
+                //user.ManagerID = row["ManagerID"] != DBNull.Value ? (int?)row["ManagerID"] : null;
                 users.Add(user);
             }
 
@@ -112,10 +113,8 @@ namespace EmployeeTraining.DAL
                     DepartmentID = int.Parse(row["DepartmentID"].ToString()),
                     ManagerID = int.Parse(row["ManagerID"].ToString())
                 };
-                    return user;
-                
+                    return user;              
             }
-
             return null;
         }
 
@@ -167,7 +166,6 @@ namespace EmployeeTraining.DAL
         {
             throw new NotImplementedException();
         }
-
 
         public bool Login(UserModel user)
         {

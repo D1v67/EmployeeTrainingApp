@@ -13,11 +13,7 @@ namespace EmployeeTraining.Interfaces
     public interface IAccountService
     {
         bool AuthenticateUser(AccountModel model);
-
-
         AccountModel GetUserDetailsWithRoles(AccountModel model);
-
         void RegisterUser(RegisterViewModel model);
-
     }
 }

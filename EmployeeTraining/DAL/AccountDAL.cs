@@ -15,42 +15,35 @@ namespace EmployeeTraining.DAL
     public class AccountDAL : IAccountDAL
     {
         public const string AUTHENTICATE_USER_QUERY = @"
-                                                    SELECT u.* 
-                                                    FROM [User] u
-                                                    INNER JOIN Account a ON u.UserID = a.UserID
-                                                    WHERE u.Email = @Email AND a.Password = @Password";
+                                                        SELECT u.* 
+                                                        FROM [User] u
+                                                        INNER JOIN Account a ON u.UserID = a.UserID
+                                                        WHERE u.Email = @Email AND a.Password = @Password";
         public const string GET_USER_DETAILS_WITH_ROLE_QUERY = @"SELECT u.*, r.*
-                                                    FROM [User] u WITH(NOLOCK)
-                                                    INNER JOIN Role r WITH(NOLOCK) ON u.RoleID = r.RoleID
-                                                    WHERE u.Email = @Email";
+                                                                FROM [User] u WITH(NOLOCK)
+                                                                INNER JOIN Role r WITH(NOLOCK) ON u.RoleID = r.RoleID
+                                                                WHERE u.Email = @Email";
 
         public const string INSERT_ACCOUNT_QUERY = @"INSERT INTO [dbo].[Account]
-                                                           (
-                                                           ,[UserID]
-                                                           ,[Password]) 
+                                                           ([UserID]
+                                                           ,[Password])
                                                      VALUES
-                                                           (
-                                                           ,@UserID
+                                                           (@UserID
                                                            ,@Password)";
 
         public string INSERT_USER_AND_ACCOUNT_REGISTER_QUERY = @"
-            BEGIN TRANSACTION;
-
-            DECLARE @key int
-
-            INSERT INTO [dbo].[User]  ([FirstName] ,[LastName],[Email],[NIC],[MobileNumber]) 
-            VALUES (@FirstName, @LastName, @Email, @NIC, @MobileNumber)
- 
-            SELECT @key = @@IDENTITY
- 
-            INSERT INTO [dbo].[Account]([UserID],[Password]) 
-            VALUES(@key, @Password)
-
-            COMMIT;
-         ";
+                                                                BEGIN TRANSACTION;
+                                                                DECLARE @key int
+                                                                INSERT INTO [dbo].[User]  ([FirstName] ,[LastName],[Email],[NIC],[MobileNumber]) 
+                                                                VALUES (@FirstName, @LastName, @Email, @NIC, @MobileNumber)
+                                                                SELECT @key = @@IDENTITY
+                                                                INSERT INTO [dbo].[Account]([UserID],[Password]) 
+                                                                VALUES(@key, @Password)
+                                                                COMMIT; ";
 
         //public const string GetUserByEmailAddress = @"select user.*,r.* from User user with(nolock) 
-        //inner join Account a with(nolock) on user.UserID = a.UserID
+        //in
+        //ner join Account a with(nolock) on user.UserID = a.UserID
         //inner join Role r with(nolock) on a.RoleId = r.RoleId
         //WHERE user.Email = @Email";
 
@@ -59,20 +52,18 @@ namespace EmployeeTraining.DAL
         public AccountDAL(IDBCommand dbCommand)
         {
             _dbCommand = dbCommand;
-
-
         }
         public  bool AuthenticateUser(AccountModel model)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
+
+            if(String.IsNullOrEmpty(model.Email) || String.IsNullOrEmpty(model.Password)) return false;
+
             parameters.Add(new SqlParameter("@Email", model.Email));
             parameters.Add(new SqlParameter("@Password", model.Password));
-
             var dt = _dbCommand.GetDataWithConditions(AUTHENTICATE_USER_QUERY, parameters);
 
             return dt.Rows.Count > 0;
-
-
         }
 
         public  AccountModel GetUserDetailsWithRoles(AccountModel model)

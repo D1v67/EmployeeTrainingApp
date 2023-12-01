@@ -51,6 +51,21 @@ namespace EmployeeTrainingMVC.Controllers
             return Json(trainings, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult SaveEnroll(EnrollmentModel model)
+        {
+            EnrollmentModel enrollment = model;
+            try
+            { Console.WriteLine("Enrolled");
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+   
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
+
         public ActionResult ViewTraining()
         {
             return View();

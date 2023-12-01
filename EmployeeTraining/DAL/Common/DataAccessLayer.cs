@@ -30,7 +30,6 @@ namespace EmployeeTraining.DAL.Common
                 {
                     connection.Close();
                 }
-
                 connection.Open();
             }
             catch (SqlException ex)

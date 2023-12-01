@@ -11,21 +11,15 @@ namespace EmployeeTrainingMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly Test_IDataAccessLayer _layer;
+       // private readonly Test_IDataAccessLayer _layer;
 
-        public HomeController(Test_IDataAccessLayer layer)
+        public HomeController()
         {
-            _layer = layer;
+            
         }
         public ActionResult Index()
         {
-            //DAL dal = new DAL();
-            //EnrollmentDAL registration = new EnrollmentDAL();
-            //registration.retrieve();
 
-            //IGenericDAL<User>() userDAL;
-            ViewBag.Message = _layer.Connect();
-            ViewBag.MyName = "MVC";
 
             return View();
         }

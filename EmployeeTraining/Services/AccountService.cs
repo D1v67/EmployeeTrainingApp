@@ -22,8 +22,7 @@ namespace EmployeeTraining.Services
         }
         public bool AuthenticateUser(AccountModel model)
         {
-            return _loginDAL.AuthenticateUser(model);
-
+                return _loginDAL.AuthenticateUser(model);
         }
 
         public AccountModel GetUserDetailsWithRoles(AccountModel model)

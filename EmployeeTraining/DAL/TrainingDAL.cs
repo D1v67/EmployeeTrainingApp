@@ -51,7 +51,6 @@ namespace EmployeeTraining.DAL
         public TrainingDAL(IDBCommand dbCommand)
         {
             _dbCommand = dbCommand;
-
         }
         public IEnumerable<TrainingModel> GetAll()
         {
@@ -87,7 +86,6 @@ namespace EmployeeTraining.DAL
 
                 TrainingModel training = new TrainingModel
                 {
-
                     TrainingID = int.Parse(row["TrainingID"].ToString()),
                     TrainingName = row["TrainingName"].ToString(),
                     TrainingDescription = row["TrainingDescription"].ToString(),
@@ -95,7 +93,6 @@ namespace EmployeeTraining.DAL
                     Capacity = int.Parse(row["Capacity"].ToString()),
                     DepartmentID = int.Parse(row["DepartmentID"].ToString())
                 };
-
                 return training;
             }
 
@@ -104,7 +101,6 @@ namespace EmployeeTraining.DAL
         public void Add(TrainingModel training)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
-
           
             parameters.Add(new SqlParameter("@TrainingName", training.TrainingName));
             parameters.Add(new SqlParameter("@TrainingDescription", training.TrainingDescription));

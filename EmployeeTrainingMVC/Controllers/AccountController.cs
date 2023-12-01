@@ -16,79 +16,43 @@ namespace EmployeeTrainingMVC.Controllers
         private readonly IUserService _userService;
         private readonly IAccountService _loginService;
 
-        public AccountController(IUserService userService, IAccountService userDAL, IAccountService loginService)
+        public AccountController(IUserService userService, IAccountService loginService)
         {
             _userService=userService;
             _loginService= loginService;
         }
-        // GET: Login
         public ActionResult Index()
         {
             return View();
         }
 
-        //public ActionResult Login()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult Login(AccountModel loginModel)
-        //{
-        //    return View();
-        //}
-
         [HttpPost]
         public JsonResult Authenticate(AccountModel model)
         {
-            //LoginModel model = new LoginModel() { Email= "john.doe@example.com", Password= "adminpassword"};
             bool IsUserValid = _loginService.AuthenticateUser(model);
-
             //return IsUserValid;
             if (IsUserValid)
             {
                 AccountModel userInfo = _loginService.GetUserDetailsWithRoles(model);
-                //this.Session["CurrentUser"] = userInfo;
-                //this.Session["CurrentRole"] = userInfo.RoleName;
                 this.Session["UserID"] = userInfo.UserID;
                 this.Session["CurrentRole"] = userInfo.RoleName;
-               // this.Session["UserName"] = userInfo.Password;
                 this.Session["Email"] = userInfo.Email;
-
-
             }
-
             return Json(new { result = IsUserValid, url = Url.Action("ViewTraining", "Enrollment") });
         }
 
         //[HttpPost]
         public ActionResult Register()
         {
-            //return RedirectToAction("Index", "Home");
             return View();
         }
         [HttpPost]
         public JsonResult Register(RegisterViewModel model)
         {
             RegisterViewModel registerViewModel = model;
-            //return RedirectToAction("Index", "Home");
-            //_userService.Add(userModel);
-            //_loginService.AddAccount(loginModel);
-            try
-            {
-                _loginService.RegisterUser(registerViewModel);
-
-                return Json(new { url = Url.Action("Index", "User") });
-            }
-            catch
-            {
-                return Json(new { url = Url.Action("Index", "Home") });
-            }
-
-            //_loginService.RegisterUser(model);
-
-            //return RedirectToAction("Index", "Home");
-
+           
+            _loginService.RegisterUser(registerViewModel);
+             return Json(new { url = Url.Action("Index", "User") });
         }
         // GET: Login/Details/5
         //public ActionResult Details(int id)

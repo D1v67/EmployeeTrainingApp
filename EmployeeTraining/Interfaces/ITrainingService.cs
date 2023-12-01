@@ -14,7 +14,5 @@ namespace EmployeeTraining.Interfaces
         void Add(TrainingModel training);
         void Delete(int id);
         void Update(TrainingModel training);
-
-
     }
 }

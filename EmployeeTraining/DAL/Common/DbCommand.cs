@@ -14,7 +14,6 @@ namespace EmployeeTraining.DAL.Common
         //{
         //    _dal = dal;
         //}
-
         public DataTable GetData(string query)
         {
             DataAccessLayer dal = new DataAccessLayer();
@@ -27,7 +26,6 @@ namespace EmployeeTraining.DAL.Common
                     sda.Fill(dt);
                 }
             }
-
             dal.CloseConnection();
 
             return dt;
@@ -45,16 +43,11 @@ namespace EmployeeTraining.DAL.Common
                 {
                     parameters.ForEach(parameter =>
                     {
-
                         cmd.Parameters.AddWithValue(parameter.ParameterName, parameter.Value);
-
                     });
-
                 }
                 numRows = cmd.ExecuteNonQuery();
-
             }
-
             dal.CloseConnection();
 
             return numRows;

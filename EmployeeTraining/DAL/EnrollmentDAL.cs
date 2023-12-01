@@ -34,19 +34,16 @@ namespace EmployeeTraining.DAL
         public EnrollmentDAL(IDBCommand dbCommand)
         {
             _dbCommand = dbCommand;
-
         }
 
         public void Add(EnrollmentModel enrollment)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
 
-
             parameters.Add(new SqlParameter("@UserID", enrollment.UserID));
             parameters.Add(new SqlParameter("@TrainingID", enrollment.TrainingID));
             parameters.Add(new SqlParameter("@EnrollmentDate", enrollment.EnrollmentDate));
             parameters.Add(new SqlParameter("@EnrollmentStatus", enrollment.EnrollmentStatus));
-
 
             _dbCommand.InsertUpdateData(INSERT_ENROLLMENT_QUERY, parameters);
 
@@ -70,7 +67,6 @@ namespace EmployeeTraining.DAL
                 enrollment.TrainingID = int.Parse(row["TrainingID"].ToString());
                 enrollment.EnrollmentDate = (DateTime)row["EnrollmentDate"];
                 enrollment.EnrollmentStatus = row["EnrollmentStatus"].ToString();
-
 
                 enrollments.Add(enrollment);
             }

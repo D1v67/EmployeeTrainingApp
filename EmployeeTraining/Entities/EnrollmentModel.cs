@@ -12,7 +12,6 @@ namespace EmployeeTraining.Entities
         public int UserID { get; set; }
         public int TrainingID { get; set; }
         public  DateTime EnrollmentDate { get; set; }
-
         public string EnrollmentStatus { get; set; }
 
 

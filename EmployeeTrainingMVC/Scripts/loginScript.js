@@ -1,11 +1,9 @@
 $(function () {
 
-
-
     let form = document.querySelector('form');
 
     form.addEventListener('submit', (e) => {
-        e.preventDefault()
+        e.preventDefault();
         return false;
     });
 
@@ -23,11 +21,16 @@ $(function () {
         var emailAddress = $("#emailAddress").val();
         var password = $("#password").val();
 
-        var authObj = { Email: emailAddress, Password: password };
+        if (emailAddress == '' || password == '') {
+            toastr.error("Username and Password cannot be null");
+            return false;
+        }
+
+        var Obj = { Email: emailAddress, Password: password };
         $.ajax({
             type: "POST",
             url: "/Account/Authenticate",
-            data: authObj,
+            data: Obj,
             dataType: "json",
             success: function (response) {
                 if (response.result) {

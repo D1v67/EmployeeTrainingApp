@@ -11,8 +11,8 @@
 <h2>@Session["Email"]</h2>
 
 @*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
 
 <table id="trainingTable" class="table">
     <thead>
@@ -29,42 +29,77 @@
     <tbody></tbody>
 </table>
 
-@section scripts {
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        
-        document.addEventListener("DOMContentLoaded", function () {
-            function loadData() {
-                fetch('/Enrollment/ViewTrainingData', {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
+
+<div class="modal" id="enrollModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            Modal Header
+            <div class="modal-header">
+                <h4 class="modal-title">Enroll in Training</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            Modal Body
+            <div class="modal-body">
+                <p id="trainingInfo"></p>
+                <p>User ID: <span id="userIdInfo"></span></p>
+                <label for="departmentDropdown">Select Department:</label>
+
+                <select id="departmentDropdown" class="form-control">
+                    
+                </select>
+                
+                <label>Select Courses:</label>
+                <div id="coursesCheckboxList">
+                    
+                </div>
+            </div>
+            Modal Footer
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="saveEnrollment()">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        function loadData() {
+            fetch('/Enrollment/ViewTrainingData', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json()
+                    }
+                    else {
+                        console.log(response.status)
                     }
                 })
-                    .then(response => {
-                        if (response.ok) {
-                            return response.json()
-                        }
-                        else {
-                            console.log(response.status)
-                        }
-                    })
-                    .then(data => updateTable(data))
-                    .catch(error => console.error('Error:', error));
-            }
+                .then(data => updateTable(data))
+                .catch(error => console.error('Error:', error));
+        }
 
-            //  update the table with data
-            function updateTable(data) {
-                console.log('here')
-                var tableBody = document.querySelector('#trainingTable tbody');
-                tableBody.innerHTML = ''; 
-           
-                data.forEach(function (item) {
+        //  update the table with data
+        function updateTable(data) {
+            console.log('here')
+            var tableBody = document.querySelector('#trainingTable tbody');
+            tableBody.innerHTML = '';
 
-                    var registrationDeadlineDate = new Date(parseInt(item.RegistrationDeadline.substr(6)));
-                    var row = document.createElement('tr');
-                    row.innerHTML = `
+            data.forEach(function (item) {
+
+                var registrationDeadlineDate = new Date(parseInt(item.RegistrationDeadline.substr(6)));
+                var row = document.createElement('tr');
+                row.innerHTML = `
                     <td>${item.TrainingID}</td>
                     <td>${item.TrainingName}</td>
                     <td>${item.TrainingDescription}</td>
@@ -73,107 +108,105 @@
                     <td>${item.DepartmentID}</td>
                     <td><button type="button" class="btn btn-primary" onclick="enroll(${item.TrainingID})">Enroll</button></td>
                 `;
-                    tableBody.appendChild(row);
-                });
-            }
-            // format date in 'YYYY-MM-DD' 
-            function formatDate(date) {
-                var year = date.getFullYear();
-                var month = ('0' + (date.getMonth() + 1)).slice(-2);
-                var day = ('0' + date.getDate()).slice(-2);
-                return year + '-' + month + '-' + day;
-            }
+                tableBody.appendChild(row);
+            });
+        }
+        // format date in 'YYYY-MM-DD'
+        function formatDate(date) {
+            var year = date.getFullYear();
+            var month = ('0' + (date.getMonth() + 1)).slice(-2);
+            var day = ('0' + date.getDate()).slice(-2);
+            return year + '-' + month + '-' + day;
+        }
 
-            loadData();
-        });
-    </script>
+        loadData();
+    });
+</script>
 
- Enroll Modal 
-<div class="modal" id="enrollModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
- Modal Header 
-<div class="modal-header">
-    <h4 class="modal-title">Enroll in Training</h4>
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
-</div>
- Modal Body 
-<div class="modal-body">
-    <p id="trainingInfo"></p>
-    <p>User ID: <span id="userIdInfo"></span></p>
-    <label for="departmentDropdown">Select Department:</label>
-    <select id="departmentDropdown" class="form-control">
- Populate the dropdown dynamically if needed 
-</select>
- Display a list of checkboxes 
-<label>Select Courses:</label>
-<div id="coursesCheckboxList">
- Checkboxes will be dynamically added here 
-</div>
-</div>
- Modal Footer 
-<div class="modal-footer">
-                <button type="button" class="btn btn-success" onclick="saveEnrollment()">Save</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
 
-        </div>
-    </div>
-</div>
- Your existing scripts 
+
 <script>
     function enroll(trainingId) {
         // Set the training information in the modal
-        $("#trainingInfo").text("Enroll in Training: " + trainingId);
+        /*$("#trainingInfo").text("Enroll in Training: " + trainingId);*/
 
         // Retrieve user information from the session
-        var userId = 1;
+        //var userId = 1;
+        var userId = "@HttpContext.Current.Session["UserID"]";
 
-        // Set the user ID in the modal
-        $("#userIdInfo").text(userId);
+        console.log(userId)
 
-        // Hardcoded dummy data for testing
-        var dummyCourses = [
-            { CourseID: 1, CourseName: "Course A" },
-            { CourseID: 2, CourseName: "Course B" },
-            { CourseID: 3, CourseName: "Course C" }
-        ];
+        var enrollmentData = {
+            UserID: userId,
+            TrainingID: trainingId,
+            
+        };
+        // Call the controller action to save the enrollment
+        $.ajax({
+            url: '/Enrollment/SaveEnroll',
+            type: 'POST',
+            data: {
+                UserID: userId,
+                TrainingID: trainingId,
 
-        // Populate the courses checkbox list
-        populateCoursesCheckboxList(dummyCourses);
+            },
+            success: function (result) {
+                // 
+                alert("Enrollment successful!");
+                console.log(response.data);
+                //// 
+                //$("#enrollModal").modal("hide");
+            },
+            error: function () {
+                //
+                alert("Enrollment failed!");
+            }
+        });
+    //    //
+    //    $("#userIdInfo").text(userId);
 
-        // Show the modal
-        $("#enrollModal").modal("show");
-    }
+    //    // dummy data 
+    //    var dummyCourses = [
+    //        { CourseID: 1, CourseName: "Course A" },
+    //        { CourseID: 2, CourseName: "Course B" },
+    //        { CourseID: 3, CourseName: "Course C" }
+    //    ];
 
-    function populateCoursesCheckboxList(courses) {
-        var checkboxList = $("#coursesCheckboxList");
+    //    
+    //    populateCoursesCheckboxList(dummyCourses);
 
-        // Clear existing checkboxes and upload buttons
-        checkboxList.empty();
+    //  
+    //    $("#enrollModal").modal("show");
+    //}
 
-        // Create checkboxes and upload buttons for each course
-        for (var i = 0; i < courses.length; i++) {
-            var checkboxId = "courseCheckbox" + i;
-            var uploadBtnId = "uploadBtn" + i;
+    //function populateCoursesCheckboxList(courses) {
+    //    var checkboxList = $("#coursesCheckboxList");
 
-            var checkbox = $('<div class="form-check">' +
-                '<input class="form-check-input" type="checkbox" value="' + courses[i].CourseID + '" id="' + checkboxId + '">' +
-                '<label class="form-check-label" for="' + checkboxId + '">' + courses[i].CourseName + '</label>' +
-                '</div>');
+    //    
+    //    checkboxList.empty();
 
-            var uploadBtn = $('<div class="mt-2">' +
-                '<input type="file" id="' + uploadBtnId + '" style="display:none;">' +
-                '<button type="button" class="btn btn-primary" onclick="showUpload(' + i + ')">Upload</button>' +
-                '</div>');
+    //    
+    //    for (var i = 0; i < courses.length; i++) {
+    //        var checkboxId = "courseCheckbox" + i;
+    //        var uploadBtnId = "uploadBtn" + i;
 
-            checkboxList.append(checkbox);
-            checkboxList.append(uploadBtn);
-        }
+    //        var checkbox = $('<div class="form-check">' +
+    //            '<input class="form-check-input" type="checkbox" value="' + courses[i].CourseID + '" id="' + checkboxId + '">' +
+    //            '<label class="form-check-label" for="' + checkboxId + '">' + courses[i].CourseName + '</label>' +
+    //            '</div>');
+
+    //        var uploadBtn = $('<div class="mt-2">' +
+    //            '<input type="file" id="' + uploadBtnId + '" style="display:none;">' +
+    //            '<button type="button" class="btn btn-primary" onclick="showUpload(' + i + ')">Upload</button>' +
+    //            '</div>');
+
+    //        checkboxList.append(checkbox);
+    //        checkboxList.append(uploadBtn);
+    //    }
     }
 
     function showUpload(index) {
-        // Show the corresponding upload button
+        
         $("#uploadBtn" + index).click();
     }
 
@@ -181,25 +214,25 @@
         var trainingId = $("#trainingInfo").text().split(":")[1].trim();
         var departmentId = $("#departmentDropdown").val();
 
-        // Get the selected courses
+        
         var selectedCourses = [];
         $("input[type=checkbox]:checked").each(function () {
             selectedCourses.push($(this).val());
         });
 
-        // Call the controller action to save the enrollment
+       
         $.ajax({
             url: '/Training/Enroll',
             type: 'POST',
             data: { trainingId: trainingId, departmentId: departmentId, courses: selectedCourses },
             success: function (result) {
-                // Handle success, e.g., show a success message
+              
                 alert("Enrollment successful!");
-                // Close the modal
+               
                 $("#enrollModal").modal("hide");
             },
             error: function () {
-                // Handle error, e.g., show an error message
+            
                 alert("Enrollment failed!");
             }
         });
