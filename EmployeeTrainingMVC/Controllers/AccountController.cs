@@ -15,11 +15,13 @@ namespace EmployeeTrainingMVC.Controllers
     {
         private readonly IUserService _userService;
         private readonly IAccountService _loginService;
+        private readonly IDepartmentService _departmentService;
 
-        public AccountController(IUserService userService, IAccountService loginService)
+        public AccountController(IUserService userService, IAccountService loginService, IDepartmentService departmentService)
         {
-            _userService=userService;
-            _loginService= loginService;
+            _userService = userService;
+            _loginService = loginService;
+            _departmentService = departmentService;
         }
         public ActionResult Index()
         {
@@ -30,7 +32,6 @@ namespace EmployeeTrainingMVC.Controllers
         public JsonResult Authenticate(AccountModel model)
         {
             bool IsUserValid = _loginService.AuthenticateUser(model);
-            //return IsUserValid;
             if (IsUserValid)
             {
                 AccountModel userInfo = _loginService.GetUserDetailsWithRoles(model);
@@ -44,86 +45,103 @@ namespace EmployeeTrainingMVC.Controllers
         //[HttpPost]
         public ActionResult Register()
         {
-            return View();
+            IEnumerable<DepartmentModel> departments = _departmentService.GetAll();
+            return View(departments);
         }
+
         [HttpPost]
         public JsonResult Register(RegisterViewModel model)
         {
-            RegisterViewModel registerViewModel = model;
-           
+            RegisterViewModel registerViewModel = model;      
             _loginService.RegisterUser(registerViewModel);
              return Json(new { url = Url.Action("Index", "User") });
         }
-        // GET: Login/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
 
-        //// GET: Login/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
 
-        //// POST: Login/Create
-        //[HttpPost]
-        //public ActionResult Create(FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add insert logic here
+        [HttpGet]
+        public JsonResult GetDepartments()
+        {
+            IEnumerable<DepartmentModel> departments = _departmentService.GetAll();
+            return Json(departments, JsonRequestBehavior.AllowGet);
+        }
 
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //// GET: Login/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: Login/Edit/5
-        //[HttpPost]
-        //public ActionResult Edit(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add update logic here
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //// GET: Login/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: Login/Delete/5
-        //[HttpPost]
-        //public ActionResult Delete(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add delete logic here
-
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
     }
 }
+
+
+// GET: Login/Details/5
+//public ActionResult Details(int id)
+//{
+//    return View();
+//}
+
+//// GET: Login/Create
+//public ActionResult Create()
+//{
+//    return View();
+//}
+
+//// POST: Login/Create
+//[HttpPost]
+//public ActionResult Create(FormCollection collection)
+//{
+//    try
+//    {
+//        // TODO: Add insert logic here
+
+//        return RedirectToAction("Index");
+//    }
+//    catch
+//    {
+//        return View();
+//    }
+//}
+
+//// GET: Login/Edit/5
+//public ActionResult Edit(int id)
+//{
+//    return View();
+//}
+
+//// POST: Login/Edit/5
+//[HttpPost]
+//public ActionResult Edit(int id, FormCollection collection)
+//{
+//    try
+//    {
+//        // TODO: Add update logic here
+
+//        return RedirectToAction("Index");
+//    }
+//    catch
+//    {
+//        return View();
+//    }
+//}
+
+//// GET: Login/Delete/5
+//public ActionResult Delete(int id)
+//{
+//    return View();
+//}
+
+//// POST: Login/Delete/5
+//[HttpPost]
+//public ActionResult Delete(int id, FormCollection collection)
+//{
+//    try
+//    {
+//        // TODO: Add delete logic here
+
+//        return RedirectToAction("Index");
+//    }
+//    catch
+//    {
+//        return View();
+//    }
+//}

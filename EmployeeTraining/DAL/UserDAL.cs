@@ -82,6 +82,7 @@ namespace EmployeeTraining.DAL
                 user.NIC = row["NIC"].ToString();
                 user.MobileNumber = row["MobileNumber"].ToString();
                 user.RoleID = int.Parse(row["RoleID"].ToString());
+                user.DepartmentID = int.Parse(row["DepartmentID"].ToString());
 
                 // NULL 
                 //user.DepartmentID = row["DepartmentID"] != DBNull.Value ? (int?)row["DepartmentID"] : null;

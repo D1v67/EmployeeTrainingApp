@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeTraining.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,9 @@ namespace EmployeeTraining.ViewModel
         public string Email { get; set; }
         public string NIC { get; set; }
         public string MobileNumber { get; set; }
+        public int DepartmentID { get; set; }
         public string Password { get; set; }
+        
 
     }
 }

@@ -34,8 +34,8 @@ namespace EmployeeTraining.DAL
         public string INSERT_USER_AND_ACCOUNT_REGISTER_QUERY = @"
                                                                 BEGIN TRANSACTION;
                                                                 DECLARE @key int
-                                                                INSERT INTO [dbo].[User]  ([FirstName] ,[LastName],[Email],[NIC],[MobileNumber]) 
-                                                                VALUES (@FirstName, @LastName, @Email, @NIC, @MobileNumber)
+                                                                INSERT INTO [dbo].[User]  ([FirstName] ,[LastName],[Email],[NIC],[MobileNumber], [DepartmentID]) 
+                                                                VALUES (@FirstName, @LastName, @Email, @NIC, @MobileNumber, @DepartmentID)
                                                                 SELECT @key = @@IDENTITY
                                                                 INSERT INTO [dbo].[Account]([UserID],[Password]) 
                                                                 VALUES(@key, @Password)
@@ -57,7 +57,7 @@ namespace EmployeeTraining.DAL
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
 
-            if(String.IsNullOrEmpty(model.Email) || String.IsNullOrEmpty(model.Password)) return false;
+            //if(String.IsNullOrEmpty(model.Email) || String.IsNullOrEmpty(model.Password)) return false;//throw arg null ex
 
             parameters.Add(new SqlParameter("@Email", model.Email));
             parameters.Add(new SqlParameter("@Password", model.Password));
@@ -93,6 +93,7 @@ namespace EmployeeTraining.DAL
             parameters.Add(new SqlParameter("@Email", model.Email));
             parameters.Add(new SqlParameter("@MobileNumber", model.MobileNumber));
             parameters.Add(new SqlParameter("@Password", model.Password));
+            parameters.Add(new SqlParameter("@DepartmentID", model.DepartmentID));
 
             _dbCommand.InsertUpdateData(INSERT_USER_AND_ACCOUNT_REGISTER_QUERY, parameters);
         }
