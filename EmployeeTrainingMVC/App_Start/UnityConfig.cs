@@ -39,6 +39,10 @@ namespace EmployeeTrainingMVC
             container.RegisterType<IDepartmentService, DepartmentService>();
             container.RegisterType<IDepartmentDAL, DepartmentDAL>();
 
+            container.RegisterType<IPrerequisiteService, PrerequisiteService>();
+            container.RegisterType<IPrerequisiteDAL, PrerequisiteDAL>();
+
+
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

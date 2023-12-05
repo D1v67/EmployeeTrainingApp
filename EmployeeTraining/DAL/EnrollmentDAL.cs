@@ -15,19 +15,10 @@ namespace EmployeeTraining.DAL
 {
     public class EnrollmentDAL : IEnrollmentDAL
     {
-        public  const string INSERT_ENROLLMENT_QUERY = @"
-                                                        INSERT INTO [dbo].[Enrollment]
-                                                           ([UserID]
-                                                           ,[TrainingID]
-                                                           ,[EnrollmentDate]
-                                                           ,[EnrollmentStatus])
-                                                     VALUES
-                                                           (@UserID
-                                                           ,@TrainingID
-                                                           ,@EnrollmentDate
-                                                           ,@EnrollmentStatus) ";
+        public  const string INSERT_ENROLLMENT_QUERY = @" INSERT INTO [dbo].[Enrollment] ([UserID],[TrainingID])
+                                                          VALUES( @UserID, @TrainingID) ";
 
-        public const string GET_ALL_ENROLLMENT_QUERY = @"SELECT  * FROM [dbo].[Enrollment]";
+        public const string GET_ALL_ENROLLMENT_QUERY = @"SELECT * FROM [dbo].[Enrollment]";
 
         private readonly IDBCommand _dbCommand;
 
@@ -42,11 +33,9 @@ namespace EmployeeTraining.DAL
 
             parameters.Add(new SqlParameter("@UserID", enrollment.UserID));
             parameters.Add(new SqlParameter("@TrainingID", enrollment.TrainingID));
-            parameters.Add(new SqlParameter("@EnrollmentDate", enrollment.EnrollmentDate));
-            parameters.Add(new SqlParameter("@EnrollmentStatus", enrollment.EnrollmentStatus));
-
+           // parameters.Add(new SqlParameter("@EnrollmentDate", enrollment.EnrollmentDate));
+            //parameters.Add(new SqlParameter("@EnrollmentStatus", enrollment.EnrollmentStatus));
             _dbCommand.InsertUpdateData(INSERT_ENROLLMENT_QUERY, parameters);
-
         }
 
         public void Delete(int id)
@@ -63,14 +52,13 @@ namespace EmployeeTraining.DAL
             foreach (DataRow row in dt.Rows)
             {
                 enrollment = new EnrollmentModel();
+                enrollment.EnrollmentID = int.Parse(row["EnrollmentID"].ToString());
                 enrollment.UserID = int.Parse(row["UserID"].ToString());
                 enrollment.TrainingID = int.Parse(row["TrainingID"].ToString());
                 enrollment.EnrollmentDate = (DateTime)row["EnrollmentDate"];
                 enrollment.EnrollmentStatus = row["EnrollmentStatus"].ToString();
-
                 enrollments.Add(enrollment);
             }
-
             return enrollments;
         }
 

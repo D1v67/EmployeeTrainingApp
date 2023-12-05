@@ -137,6 +137,7 @@
     <Compile Include="Controllers\EnrollmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\PrerequisiteController.cs" />
     <Compile Include="Controllers\TrainingController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -237,6 +238,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Prerequisite\" />
     <Folder Include="Views\UserDefault\" />
   </ItemGroup>
   <ItemGroup>

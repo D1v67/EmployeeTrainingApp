@@ -10,7 +10,6 @@ namespace EmployeeTraining.Services
 {
     public class NotificationService : INotification
     {
-
         public void SendNotification(UserModel user, string message)
         {
             throw new NotImplementedException();

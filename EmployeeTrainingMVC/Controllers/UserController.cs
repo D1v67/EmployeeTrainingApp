@@ -1,5 +1,6 @@
 ﻿using EmployeeTraining.Entities;
 using EmployeeTraining.Interfaces;
+using EmployeeTraining.Services;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -24,47 +25,15 @@ namespace EmployeeTrainingMVC.Controllers
             {
                 Console.WriteLine(ex.Message);
             }
-
             return View(users);
         }
-        // GET: UserDefault
-        //public ActionResult Index()
-        //{
-        //    //UserModel user = new UserModel() {FirstName= "Divesh", LastName="Nugesur",Email="eee@mail.com",NIC ="NSSS11",MobileNumber="32321312", RoleID = 3, DepartmentID= 2, ManagerID= 2};
 
-        //    //IEnumerable<UserModel> users = new List<UserModel>();
-        //    //try
-        //    //{
-
-        //    //    users = _userService.GetAll();
-
-
-        //    //}
-        //    //catch (Exception ex)
-        //    //{
-        //    //    Console.WriteLine(ex.Message);
-        //    //}
-        //    try
-        //    {
-        //        IEnumerable<UserModel> users = new List<UserModel>();
-        //        //users = _userService.GetAll();
-
-        //        users = _userService.GetAll();
-        //        //UserModel user = new UserModel();
-
-        //        //_userService.Add(user);
-
-        //        //_userService.Delete(6);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine(ex.Message);
-
-        //    }
-
-        //    return View(users);
-        //}
-
+        public JsonResult GetManagers()
+        {
+            IEnumerable<UserModel> managers = _userService.GetAllManager();
+            return Json(managers, JsonRequestBehavior.AllowGet);
+        }
+        //TODO
         // GET: UserDefault/Details/5
         public ActionResult Details(int id)
         {
@@ -76,15 +45,12 @@ namespace EmployeeTrainingMVC.Controllers
         {
             return View();
         }
-
         // POST: UserDefault/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
             try
             {
-                // TODO: Add insert logic here
-
                 return RedirectToAction("Index");
             }
             catch
@@ -138,3 +104,42 @@ namespace EmployeeTrainingMVC.Controllers
         }
     }
 }
+
+
+// GET: UserDefault
+//public ActionResult Index()
+//{
+//    //UserModel user = new UserModel() {FirstName= "Divesh", LastName="Nugesur",Email="eee@mail.com",NIC ="NSSS11",MobileNumber="32321312", RoleID = 3, DepartmentID= 2, ManagerID= 2};
+
+//    //IEnumerable<UserModel> users = new List<UserModel>();
+//    //try
+//    //{
+
+//    //    users = _userService.GetAll();
+
+
+//    //}
+//    //catch (Exception ex)
+//    //{
+//    //    Console.WriteLine(ex.Message);
+//    //}
+//    try
+//    {
+//        IEnumerable<UserModel> users = new List<UserModel>();
+//        //users = _userService.GetAll();
+
+//        users = _userService.GetAll();
+//        //UserModel user = new UserModel();
+
+//        //_userService.Add(user);
+
+//        //_userService.Delete(6);
+//    }
+//    catch (Exception ex)
+//    {
+//        Console.WriteLine(ex.Message);
+
+//    }
+
+//    return View(users);
+//}

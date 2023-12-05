@@ -12,7 +12,7 @@ namespace EmployeeTraining.Interfaces
 {
     public interface IAccountDAL
     {
-          bool AuthenticateUser(AccountModel model);
+          bool IsUserAuthenticated(AccountModel model);
           AccountModel GetUserDetailsWithRoles(AccountModel model);
           void Register(RegisterViewModel model);
     }

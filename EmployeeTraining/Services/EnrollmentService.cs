@@ -17,9 +17,9 @@ namespace EmployeeTraining.Services
         {
             _enrollmentDAL = enrollmentDAL;
         }
-        public void Add(EnrollmentModel training)
+        public void Add(EnrollmentModel enrollment)
         {
-            throw new NotImplementedException();
+            _enrollmentDAL.Add(enrollment);
         }
 
         public void Delete(int id)

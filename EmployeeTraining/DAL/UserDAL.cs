@@ -17,50 +17,29 @@ namespace EmployeeTraining.DAL
     {
         public const string GET_ALL_USER_QUERY = @"SELECT  * FROM [dbo].[User]";
 
-        public const string GET_USER_BY_ID_QUERY = @"SELECT u.*
-                                                        FROM [User] u 
-                                                        WHERE u.UserID = @UserID";
+        public const string GET_USER_BY_ID_QUERY = @"SELECT u.* FROM [User] u WHERE u.UserID = @UserID";
 
-        public const string INSERT_USER_QUERY = @"INSERT INTO [dbo].[User]
-                                                       ([FirstName]
-                                                       ,[LastName]
-                                                       ,[Email]
-                                                       ,[NIC]
-                                                       ,[MobileNumber]
-                                                       ,[RoleID]
-                                                       ,[DepartmentID]
-                                                       ,[ManagerID]) 
-                                                 VALUES
-                                                       (@FirstName
-                                                       ,@LastName
-                                                       ,@Email
-                                                       ,@NIC
-                                                       ,@MobileNumber
-                                                       ,@RoleID
-                                                       ,@DepartmentID
-                                                       ,@ManagerID)";
+        public const string INSERT_USER_QUERY = @"INSERT INTO [dbo].[User] ([FirstName],[LastName],[Email],[NIC],[MobileNumber],[RoleID],[DepartmentID],[ManagerID]) 
+                                                 VALUES (@FirstName, @LastName, @Email, @NIC, @MobileNumber, @RoleID, @DepartmentID, @ManagerID)";
 
         public const string UPDATE_USER_QUERY = @"UPDATE [dbo].[User]
-                                                   SET [FirstName] = @FirstName
-                                                      ,[LastName] = @LastName
-                                                      ,[Email] = @Email
-                                                      ,[NIC] = @NIC
-                                                      ,[MobileNumber] = @MobileNumber
-                                                      ,[RoleID] = @RoleID
-                                                      ,[DepartmentID] = @DepartmentID
-                                                      ,[ManagerID] = @ManagerID
+                                                 SET [FirstName] = @FirstName,[LastName] = @LastName,[Email] = @Email,[NIC] = @NIC,[MobileNumber] = @MobileNumber,[RoleID] = @RoleID,[DepartmentID] = @DepartmentID,[ManagerID] = @ManagerID
                                                  WHERE [UserID] = @UserID";
 
         public const string DELETE_USER_QUERY = @"DELETE FROM [dbo].[User] WHERE [UserID] = @UserID";
 
-        public const string GET_USER_BY_NIC = "";
-        public const string GET_USER_BY_EMAIL = "";
-        public const string GET_USER_BY_MOBILE_NUMBER = "";
+        public const string GET_ALL_MANAGERS = @"SELECT U.*
+                                                FROM [User] U
+                                                JOIN Role R ON U.RoleID = R.RoleID
+                                                WHERE R.RoleType = @RoleName;";
+
+        public const string GET_USER_BY_NIC = @"SELECT * FROM Users WHERE NIC = @NIC";
+        public const string GET_USER_BY_EMAIL = @"SELECT * FROM Users WHERE Email = @Email;";
+        public const string GET_USER_BY_MOBILE_NUMBER = @"SELECT * FROM Users WHERE MobileNumber = @MobileNumber";
 
         public const string SET_USER_PASSWORD = "";
 
         private readonly IDBCommand _dbCommand;
-
         public  UserDAL(IDBCommand dbCommand)
         {
             _dbCommand = dbCommand;
@@ -83,16 +62,12 @@ namespace EmployeeTraining.DAL
                 user.MobileNumber = row["MobileNumber"].ToString();
                 user.RoleID = int.Parse(row["RoleID"].ToString());
                 user.DepartmentID = int.Parse(row["DepartmentID"].ToString());
-
                 // NULL 
-                //user.DepartmentID = row["DepartmentID"] != DBNull.Value ? (int?)row["DepartmentID"] : null;
                 //user.ManagerID = row["ManagerID"] != DBNull.Value ? (int?)row["ManagerID"] : null;
                 users.Add(user);
             }
-
             return users;
         }
-
         public UserModel GetByID(int id)
         {
             var parameters = new List<SqlParameter> { new SqlParameter("@UserID", id) };
@@ -101,7 +76,6 @@ namespace EmployeeTraining.DAL
             if (dt.Rows.Count > 0)
             {
                 DataRow row = dt.Rows[0];
-
                 UserModel user = new UserModel
                 {
                     UserID = int.Parse(row["UserID"].ToString()),
@@ -118,8 +92,6 @@ namespace EmployeeTraining.DAL
             }
             return null;
         }
-
-
         public void Add(UserModel user)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -135,7 +107,6 @@ namespace EmployeeTraining.DAL
 
             _dbCommand.InsertUpdateData(INSERT_USER_QUERY, parameters);
         }
-
         public void Delete(int id)
         {
             var parameters = new List<SqlParameter> { new SqlParameter("@UserID", id) };
@@ -158,6 +129,28 @@ namespace EmployeeTraining.DAL
             _dbCommand.InsertUpdateData(UPDATE_USER_QUERY, parameters);
         }
 
+        public IEnumerable<UserModel> GetAllManager()
+        {
+            List<UserModel> managers = new List<UserModel>();
+
+            var parameters = new List<SqlParameter> { new SqlParameter("@RoleName", RolesEnum.Manager.ToString()) };
+            var dt = _dbCommand.GetDataWithConditions(GET_ALL_MANAGERS, parameters);
+            UserModel manager;
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    manager = new UserModel();
+                    manager.UserID = int.Parse(row["UserID"].ToString());
+                    manager.FirstName = row["FirstName"].ToString();
+                    manager.LastName = row["LastName"].ToString();
+
+                    managers.Add(manager);
+                }
+                return managers;
+            }
+            return null;
+        }
         public bool ApproveRequest(UserModel user, TrainingModel traning)
         {
             throw new NotImplementedException();

@@ -15,8 +15,9 @@ namespace EmployeeTraining.ViewModel
         public string NIC { get; set; }
         public string MobileNumber { get; set; }
         public int DepartmentID { get; set; }
+        public int ManagerID { get; set; }
         public string Password { get; set; }
-        
-
+        public IEnumerable<UserModel> ListOfManagers { get; set; }
+        public IEnumerable<DepartmentModel> ListOfDepartments { get; set; }
     }
 }

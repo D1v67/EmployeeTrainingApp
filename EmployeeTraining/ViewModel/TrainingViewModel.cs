@@ -8,10 +8,8 @@ namespace EmployeeTraining.ViewModel
 {
     public class TrainingViewModel
     {
-
         public string TrainingName { get; set; }
         public string TrainingDescription { get; set; }
         public DateTime RegistrationDeadline { get; set; }
-
     }
 }

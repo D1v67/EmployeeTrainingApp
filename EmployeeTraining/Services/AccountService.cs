@@ -20,21 +20,19 @@ namespace EmployeeTraining.Services
             _userDAL = userDAL;
             _loginDAL = loginDAL;
         }
-        public bool AuthenticateUser(AccountModel model)
+        public bool IsUserAuthenticated(AccountModel model)
         {
-                return _loginDAL.AuthenticateUser(model);
+                return _loginDAL.IsUserAuthenticated(model);
         }
 
         public AccountModel GetUserDetailsWithRoles(AccountModel model)
         {
             return _loginDAL.GetUserDetailsWithRoles(model);
-
         }
 
         public void RegisterUser(RegisterViewModel model)
         {
             _loginDAL.Register(model);
-
         }
     }
 }

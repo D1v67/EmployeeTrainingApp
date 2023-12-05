@@ -16,19 +16,24 @@ namespace EmployeeTrainingMVC.Controllers
         {
             _departmentService = departmentService;
         }
-        // GET: Department
         public ActionResult Index()
         {
-            IEnumerable<DepartmentModel> departments = new List<DepartmentModel>();
+            IEnumerable<DepartmentModel> departments = GetListOfDepartments();
+            return View(departments);
+        }
+
+        private IEnumerable<DepartmentModel> GetListOfDepartments()
+        {
             try
             {
-                departments = _departmentService.GetAll();
+                return _departmentService.GetAll();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return Enumerable.Empty<DepartmentModel>();
             }
-            return View(departments);
         }
+
     }
 }

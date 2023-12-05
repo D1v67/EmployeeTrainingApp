@@ -9,22 +9,23 @@ namespace EmployeeTraining.Services
 {
     public class ValidationServices : IValidationService
     {
-        public bool IsEmailValid(string email)
+        private readonly IUserService userService;
+
+        public ValidationServices(IUserService userService)
+        {
+
+        }
+        public bool IsEmailExist(string email)
         {
             throw new NotImplementedException();
         }
 
-        public bool IsNICValid(string nic)
+        public bool IsMobileNumberExist(string phone)
         {
             throw new NotImplementedException();
         }
 
-        public bool IsPasswordValid(string password)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsPhoneValid(string phone)
+        public bool IsNICExist(string nic)
         {
             throw new NotImplementedException();
         }

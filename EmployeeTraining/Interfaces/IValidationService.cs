@@ -8,9 +8,8 @@ namespace EmployeeTraining.Interfaces
 {
     internal interface IValidationService
     {
-        bool IsEmailValid(string email);
-        bool IsNICValid(string nic);
-        bool IsPasswordValid(string password);
-        bool IsPhoneValid(string phone);
+        bool IsEmailExist(string email);
+        bool IsNICExist(string nic);
+        bool IsMobileNumberExist(string phone);
     }
 }

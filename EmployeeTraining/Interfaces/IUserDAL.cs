@@ -10,6 +10,7 @@ namespace EmployeeTraining.Interfaces
     public interface IUserDAL
     {
         IEnumerable<UserModel> GetAll();
+        IEnumerable<UserModel> GetAllManager();
         UserModel GetByID(int id);
         void Add(UserModel user);
         void Delete(int id);

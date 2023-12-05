@@ -19,8 +19,6 @@ namespace EmployeeTrainingMVC.Controllers
         }
         public ActionResult Index()
         {
-
-
             return View();
         }
 

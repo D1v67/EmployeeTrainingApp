@@ -13,17 +13,15 @@ namespace EmployeeTrainingMVC.Controllers
     {
         private readonly IEnrollmentService _enrollmentService;
         private readonly ITrainingService _trainingService;
-
-        public EnrollmentController(IEnrollmentService enrollmentService, ITrainingService trainingService)
+        private readonly IPrerequisiteService _prerequisiteService;
+        public EnrollmentController(IEnrollmentService enrollmentService, ITrainingService trainingService, IPrerequisiteService prerequisiteService)
         {
             _enrollmentService = enrollmentService;
             _trainingService = trainingService;
+            _prerequisiteService = prerequisiteService;
         }
-        // GET: Enrollment
-        //GET ALL TRAINING
         public ActionResult Index()
         {
-
             IEnumerable<EnrollmentModel> enrollments = new List<EnrollmentModel>();
             try
             {
@@ -34,6 +32,11 @@ namespace EmployeeTrainingMVC.Controllers
                 Console.WriteLine(ex.Message);
             }
             return View(enrollments);
+        }
+
+        public ActionResult ViewTraining()
+        {
+            return View();
         }
 
         public JsonResult ViewTrainingData()
@@ -51,13 +54,24 @@ namespace EmployeeTrainingMVC.Controllers
             return Json(trainings, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        public ActionResult SaveEnroll(EnrollmentModel model)
+        public ActionResult EnrollTraining(int trainingID)
         {
-            EnrollmentModel enrollment = model;
+            IEnumerable<PrerequisiteModel> prerequisites = new List<PrerequisiteModel>();
+        
+            prerequisites = _prerequisiteService.GetPrerequisiteByTrainingID(trainingID);
+            ViewBag.ListOfPrerequisiteByTrainingID = prerequisites;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SaveEnrollment(EnrollmentModel model)
+        {
+            //EnrollmentModel enrollment = model;
             try
-            { Console.WriteLine("Enrolled");
-                return Json(new { success = true });
+            {
+                _enrollmentService.Add(model);
+               // Console.WriteLine("Enrolled");
+                return Json(new { success = true, message = "Enrollment successful!" });
             }
             catch (Exception ex)
             {
@@ -66,13 +80,22 @@ namespace EmployeeTrainingMVC.Controllers
             }
         }
 
-        public ActionResult ViewTraining()
+        public ActionResult GetPrerequisiteByTrainingID(int TrainigID)
         {
-            return View();
+            IEnumerable<PrerequisiteModel> prerequisites = new List<PrerequisiteModel>();
+            try
+            {
+                prerequisites = _prerequisiteService.GetPrerequisiteByTrainingID(TrainigID);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return Json(prerequisites, JsonRequestBehavior.AllowGet);
+
         }
 
-
-
+        //TODO
         // GET: Enrollment/Details/5
         public ActionResult Details(int id)
         {

@@ -22,6 +22,10 @@ namespace EmployeeTraining.Services
             return _userDAL.GetAll();
         }
 
+        public IEnumerable<UserModel> GetAllManager()
+        {
+            return _userDAL.GetAllManager();
+        }
         public UserModel GetByID(int id)
         {
            return  _userDAL.GetByID(id);

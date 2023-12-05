@@ -17,34 +17,27 @@ namespace EmployeeTraining.DAL
     {
         public const string GET_ALL_TRAINING_QUERY = @"SELECT  * FROM [dbo].[Training]";
 
-        public const string GET_TRAINING_BY_ID_QUERY = @"SELECT
-                                                         t.*
-                                                        FROM Training t WITH(NOLOCK)
+        public const string GET_TRAINING_BY_ID_QUERY = @"SELECT t.* FROM Training t WITH(NOLOCK)
                                                         LEFT JOIN Department d WITH(NOLOCK) ON t.DepartmentID = d.DepartmentID
                                                         WHERE t.TrainingID = @TrainingID";
 
-        public const string INSERT_TRAINING_QUERY= @"INSERT INTO [dbo].[Training]
-                                                       ([TrainingName]
-                                                       ,[RegistrationDeadline]
-                                                       ,[TrainingDescription]
-                                                       ,[Capacity]
-                                                       ,[DepartmentID])
-                                                     VALUES
-                                                       (@TrainingName
-                                                       ,@RegistrationDeadline
-                                                       ,@TrainingDescription
-                                                       ,@Capacity
-                                                       ,@DepartmentID)";
+        public const string INSERT_TRAINING_QUERY= @"INSERT INTO [dbo].[Training] ([TrainingName],[RegistrationDeadline] ,[TrainingDescription],[Capacity],[DepartmentID])
+                                                     VALUES ( @TrainingName, @RegistrationDeadline, @TrainingDescription, @Capacity ,@DepartmentID)";
 
-        public const string UPDATE_TRAINING_QUERY = @"UPDATE [dbo].[Training]
-                                                       SET [TrainingName] = @TrainingName
-                                                          ,[RegistrationDeadline] = @RegistrationDeadline
-                                                          ,[TrainingDescription] = @TrainingDescription
-                                                          ,[Capacity] = @Capacity
-                                                          ,[DepartmentID] = @DepartmentID
+        public const string UPDATE_TRAINING_QUERY = @"UPDATE [dbo].[Training] SET [TrainingName] = @TrainingName,[RegistrationDeadline] = @RegistrationDeadline,[TrainingDescription] = @TrainingDescription
+                                                     ,[Capacity] = @Capacity,[DepartmentID] = @DepartmentID
                                                      WHERE [TrainingID] = @TrainingID";
 
         public const string DELETE_TRAINING_QUERY = @"DELETE FROM [dbo].[Training] WHERE [TrainingID] = @TrainingID";
+
+        public const string GET_TRAINING_BY_MANAGER_ID = @"SELECT T.TrainingID, T.TrainingName, T.RegistrationDeadline,T.TrainingDescription, T.Capacity,D.DepartmentName, U.FirstName, U.LastName, E.EnrollmentDate, E.EnrollmentStatus
+                                                            FROM Training T JOIN Department D ON T.DepartmentID = D.DepartmentID JOIN Enrollment E ON T.TrainingID = E.TrainingID JOIN [User] U ON E.UserID = U.UserID
+                                                            WHERE U.ManagerID = @ManagerID
+                                                            ORDER BY T.TrainingID, U.UserID";
+
+        public const string GET_TRAINING_BY_DEPARTMENT_ID = @"SELECT T.TrainingID,T.TrainingName, T.RegistrationDeadline,T.TrainingDescription,T.Capacity,D.DepartmentName
+                                                            FROM Training T JOIN Department D ON T.DepartmentID = D.DepartmentID
+                                                            WHERE T.DepartmentID = @DepartmentID";
 
         private readonly IDBCommand _dbCommand;
 
@@ -70,11 +63,8 @@ namespace EmployeeTraining.DAL
 
                 trainings.Add(training);
             }
-
             return trainings;
-
         }
-
         public TrainingModel GetByID(int id)
         {
             var parameters = new List<SqlParameter> { new SqlParameter("@TrainingID", id) };
@@ -95,7 +85,6 @@ namespace EmployeeTraining.DAL
                 };
                 return training;
             }
-
             return null;
         }
         public void Add(TrainingModel training)

@@ -30,17 +30,7 @@ namespace EmployeeTraining.DAL
             _dbCommand = dbCommand;
         }
 
-        public void Add(DepartmentModel department)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<DepartmentModel> GetAll()
+       public IEnumerable<DepartmentModel> GetAll()
         {
             List<DepartmentModel> departments = new List<DepartmentModel>();
 
@@ -51,15 +41,22 @@ namespace EmployeeTraining.DAL
                 department = new DepartmentModel();
                 department.DepartmentID = int.Parse(row["DepartmentID"].ToString());
                 department.DepartmentName = row["DepartmentName"].ToString();
-      
                 departments.Add(department);
             }
-
             return departments;
-
         }
 
         public DepartmentModel GetByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add(DepartmentModel department)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }

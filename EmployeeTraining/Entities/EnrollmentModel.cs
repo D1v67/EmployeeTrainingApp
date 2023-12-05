@@ -14,8 +14,5 @@ namespace EmployeeTraining.Entities
         public  DateTime EnrollmentDate { get; set; }
         public string EnrollmentStatus { get; set; }
 
-
-        //add application
-
     }
 }
